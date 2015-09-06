@@ -15,20 +15,24 @@ public class Train {
     private Rectangle boundingBox;
 
     public Train() {
-        this.x = 500;
+        this.x = 400;
         this.y = 100;
-        this.width = 95;
-        this.height = 130;
-        this.speed = 2;
+        this.width = 100;
+        this.height = 100;
+        this.speed = 5;
         this.boundingBox = new Rectangle(this.width, this.height);
         this.direction = "left";
     }
 
-    public boolean Intersects(Rectangle otherObject) {
-        if (this.boundingBox.contains(otherObject) || otherObject.contains(this.boundingBox)) {
-            return true;
-        }
-        return false;
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public boolean intersects(Rectangle otherObject) {
+        return this.boundingBox.x + this.boundingBox.width >= otherObject.x &&
+                this.boundingBox.y + this.boundingBox.height >= otherObject.y &&
+                this.boundingBox.y <= otherObject.y + otherObject.height &&
+                this.boundingBox.x <= otherObject.x + otherObject.width;
     }
 
     public void update() {

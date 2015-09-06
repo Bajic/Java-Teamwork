@@ -2,6 +2,7 @@ package game;
 
 import displays.Display;
 import displays.ImageLoader;
+import models.RailroadSwitch;
 import models.Train;
 
 import java.awt.*;
@@ -20,6 +21,7 @@ public class Engine implements Runnable {
     private BufferedImage backgroundImage;
     private Train train;
     private InputMouseListener mouseListener;
+    private RailroadSwitch railroadSwitch;
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -31,13 +33,18 @@ public class Engine implements Runnable {
 
     public void initialize() {
         display = new Display(this.title, this.width, this.height);
-        backgroundImage = ImageLoader.load("/images/testBackgroundImage.png");
+        backgroundImage = ImageLoader.load("/images/testSimpleWhiteBackGround.png");
         train = new Train();
         this.mouseListener = new InputMouseListener(this.display);
+        this.railroadSwitch = new RailroadSwitch();
     }
 
     private void update() {
+
         train.update();
+        if (train.intersects(railroadSwitch.getBoundingBox())){
+            railroadSwitch.changeDirection(train);
+        }
     }
 
     private void draw() {
@@ -50,6 +57,7 @@ public class Engine implements Runnable {
         graphics = bufferStrategy.getDrawGraphics();
         graphics.clearRect(0, 0, this.width, this.height);
         graphics.drawImage(backgroundImage, 0, 0, null);
+        railroadSwitch.draw(graphics);
         train.draw(this.graphics);
 
         this.bufferStrategy.show();
