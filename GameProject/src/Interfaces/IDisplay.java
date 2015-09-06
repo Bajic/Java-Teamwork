@@ -1,6 +1,4 @@
-package Interfaces;
-
-import java.awt.*;
+package interfaces;
 
 public interface IDisplay {
 

@@ -1,4 +1,4 @@
-package Displays;
+package displays;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
