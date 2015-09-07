@@ -19,9 +19,10 @@ public class Engine implements Runnable {
     private BufferStrategy bufferStrategy;
     private Graphics graphics;
     private BufferedImage backgroundImage;
-    private Train train;
     private InputMouseListener mouseListener;
-    private RailroadSwitch railroadSwitch;
+
+    public static Train train;
+    public static RailroadSwitch railroadSwitch;
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -43,7 +44,7 @@ public class Engine implements Runnable {
 
         train.update();
         if (train.intersects(railroadSwitch.getBoundingBox())){
-            railroadSwitch.changeDirection(train);
+            railroadSwitch.changeTrainDirection(train);
         }
     }
 
