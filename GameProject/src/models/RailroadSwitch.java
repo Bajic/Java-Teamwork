@@ -1,6 +1,6 @@
 package models;
 
-import displays.ImageLoader;
+import displays.ImageCreator;
 
 import java.awt.*;
 
@@ -48,7 +48,7 @@ public class RailroadSwitch {
     }
 
     public void draw(Graphics graphics) {
-        graphics.drawImage(ImageLoader.load("/images/switch.png"), this.x, this.y, null);
+        graphics.drawImage(ImageCreator.load("/images/switch.png"), this.x, this.y, null);
     }
 
 

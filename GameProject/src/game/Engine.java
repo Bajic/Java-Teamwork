@@ -1,7 +1,7 @@
 package game;
 
 import displays.Display;
-import displays.ImageLoader;
+import displays.ImageCreator;
 import models.RailroadSwitch;
 import models.Train;
 
@@ -21,8 +21,8 @@ public class Engine implements Runnable {
     private BufferedImage backgroundImage;
     private InputMouseListener mouseListener;
 
-    public static Train train;
-    public static RailroadSwitch railroadSwitch;
+    private Train train;
+    public static RailroadSwitch railroadSwitch;  // Public field!
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -33,8 +33,9 @@ public class Engine implements Runnable {
     }
 
     public void initialize() {
+        ImageCreator.init();
         display = new Display(this.title, this.width, this.height);
-        backgroundImage = ImageLoader.load("/images/testSimpleWhiteBackGround.png");
+        backgroundImage = ImageCreator.load("/images/testSimpleWhiteBackGround.png");
         train = new Train();
         this.mouseListener = new InputMouseListener(this.display);
         this.railroadSwitch = new RailroadSwitch();

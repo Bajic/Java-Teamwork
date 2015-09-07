@@ -1,10 +1,12 @@
 package models;
 
-import displays.ImageLoader;
+import displays.ImageCreator;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Train {
+    private BufferedImage trainImage;
     private int x;
     private int y;
     private int speed;
@@ -16,9 +18,9 @@ public class Train {
 
     public Train() {
         this.x = 400;
-        this.y = 100;
-        this.width = 100;
-        this.height = 100;
+        this.y = 180;
+        this.width = 40;
+        this.height = 50;
         this.speed = 5;
         this.boundingBox = new Rectangle(this.width, this.height);
         this.direction = "left";
@@ -40,20 +42,24 @@ public class Train {
         switch (direction) {
             case "up":
                 this.y -= this.speed;
+                this.trainImage = ImageCreator.trainUp;
                 break;
             case "down":
                 this.y += this.speed;
+                this.trainImage = ImageCreator.trainDown;
                 break;
             case "left":
                 this.x -= this.speed;
+                this.trainImage = ImageCreator.trainLeft;
                 break;
             case "right":
                 this.x += this.speed;
+                this.trainImage = ImageCreator.trainRight;
                 break;
         }
     }
 
     public void draw(Graphics graphics) {
-        graphics.drawImage(ImageLoader.load("/images/Train.gif"), this.x, this.y, null);
+        graphics.drawImage(this.trainImage, this.x, this.y, null);
     }
 }
