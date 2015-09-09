@@ -42,7 +42,7 @@ public class Engine implements Runnable {
         backgroundImage = ImageCreator.load("/images/background.png");
         train = new Train();
         this.mouseListener = new InputMouseListener(this.display);
-        this.railroadSwitch = new RailroadSwitch();
+        this.railroadSwitch = new RailroadSwitch(410,340,400,415,"up","right");
         this.turns = new ArrayList<>();
         turns.add(new Turn(450, 550, "up"));
         turns.add(new Turn(420, 200, "right")); //TODO: add three more

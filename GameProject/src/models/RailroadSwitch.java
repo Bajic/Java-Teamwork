@@ -1,7 +1,5 @@
 package models;
 
-import displays.ImageCreator;
-
 import java.awt.*;
 
 public class RailroadSwitch {
@@ -14,41 +12,51 @@ public class RailroadSwitch {
     private String oppositeDirection;
 
     private Rectangle boundingBox;
+    private Rectangle boundingBoxForClick;
 
-    public RailroadSwitch() {
-        this.x = 135;
-        this.y = 160;
-        this.width = 100;
-        this.height = 100;
-        this.boundingBox = new Rectangle(x-100,y,this.width,this.height);
-        this.direction = "up";
-        this.oppositeDirection = "down";
+    public RailroadSwitch(int x, int y, int clickX, int clickY, String direction, String oppositeDirection) {
+        this.x = x;
+        this.y = y;
+        this.width = 60;
+        this.height = 60;
+        this.boundingBox = new Rectangle(x, y, this.width, this.height);
+        this.boundingBoxForClick = new Rectangle(clickX, clickY, this.width + 15, this.height + 15);
+        this.direction = direction;
+        this.oppositeDirection = oppositeDirection;
     }
 
     public Rectangle getBoundingBox() {
         return boundingBox;
     }
 
-    public void changeDirection(){
+    public void changeDirection() {
         String oldDirection = this.direction;
-        this.direction=oppositeDirection;
+        this.direction = oppositeDirection;
         System.out.println(direction);
         this.oppositeDirection = oldDirection;
     }
 
-    public boolean intersects(int mouseX,int mouseY) {
-        return this.boundingBox.x +100 + this.boundingBox.width >= mouseX &&
+    public boolean intersects(int mouseX, int mouseY) {
+        return this.boundingBox.x + this.boundingBox.width >= mouseX &&
                 this.boundingBox.y + this.boundingBox.height >= mouseY &&
-                this.boundingBox.x +100 <= mouseX &&
+                this.boundingBox.x <= mouseX &&
                 this.boundingBox.y <= mouseY;
     }
 
-    public void changeTrainDirection(Train train){
+    public boolean intersectsClick(int mouseX, int mouseY) {
+        return this.boundingBoxForClick.x + this.boundingBoxForClick.width >= mouseX &&
+                this.boundingBoxForClick.y + this.boundingBoxForClick.height >= mouseY &&
+                this.boundingBoxForClick.x <= mouseX &&
+                this.boundingBoxForClick.y <= mouseY;
+    }
+
+    public void changeTrainDirection(Train train) {
         train.setDirection(this.direction);
     }
 
     public void draw(Graphics graphics) {
-        graphics.drawImage(ImageCreator.load("/images/switch.png"), this.x, this.y, null);
+       graphics.drawRect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
+        //graphics.drawRect(boundingBoxForClick.x, boundingBoxForClick.y, boundingBoxForClick.width, boundingBoxForClick.height);
     }
 
 
