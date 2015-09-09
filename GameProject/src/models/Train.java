@@ -17,13 +17,13 @@ public class Train {
     private Rectangle boundingBox;
 
     public Train() {
-        this.x = 400;
-        this.y = 180;
+        this.x = 140;
+        this.y = 540;
         this.width = 40;
         this.height = 50;
-        this.speed = 5;
+        this.speed = 2;
         this.boundingBox = new Rectangle(this.width, this.height);
-        this.direction = "left";
+        this.direction = "right";
     }
 
     public void setDirection(String direction) {

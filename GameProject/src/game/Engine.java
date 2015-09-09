@@ -4,6 +4,7 @@ import displays.Display;
 import displays.ImageCreator;
 import models.RailroadSwitch;
 import models.Train;
+import models.Turn;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -20,6 +21,7 @@ public class Engine implements Runnable {
     private Graphics graphics;
     private BufferedImage backgroundImage;
     private InputMouseListener mouseListener;
+    private Turn turn;
 
     private Train train;
     public static RailroadSwitch railroadSwitch;  // Public field!
@@ -35,10 +37,11 @@ public class Engine implements Runnable {
     public void initialize() {
         ImageCreator.init();
         display = new Display(this.title, this.width, this.height);
-        backgroundImage = ImageCreator.load("/images/testSimpleWhiteBackGround.png");
+        backgroundImage = ImageCreator.load("/images/background.png");
         train = new Train();
         this.mouseListener = new InputMouseListener(this.display);
         this.railroadSwitch = new RailroadSwitch();
+        this.turn = new Turn(450,550,"up");
     }
 
     private void update() {
@@ -46,6 +49,9 @@ public class Engine implements Runnable {
         train.update();
         if (train.intersects(railroadSwitch.getBoundingBox())){
             railroadSwitch.changeTrainDirection(train);
+        }
+        if (train.intersects(turn.getBoundingBox())){
+            train.setDirection(turn.getDirection());
         }
     }
 
@@ -61,8 +67,10 @@ public class Engine implements Runnable {
         graphics.drawImage(backgroundImage, 0, 0, null);
         railroadSwitch.draw(graphics);
         train.draw(this.graphics);
+        turn.draw(graphics);
 
         this.bufferStrategy.show();
+        graphics.setColor(Color.cyan);
         this.graphics.dispose();
     }
 
