@@ -9,6 +9,7 @@ import models.Turn;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Engine implements Runnable {
     private String title;
@@ -22,6 +23,7 @@ public class Engine implements Runnable {
     private BufferedImage backgroundImage;
     private InputMouseListener mouseListener;
     private Turn turn;
+    private ArrayList<Turn> turns;
 
     private Train train;
     public static RailroadSwitch railroadSwitch;  // Public field!
@@ -41,18 +43,23 @@ public class Engine implements Runnable {
         train = new Train();
         this.mouseListener = new InputMouseListener(this.display);
         this.railroadSwitch = new RailroadSwitch();
-        this.turn = new Turn(450,550,"up");
+        this.turns = new ArrayList<>();
+        turns.add(new Turn(450, 550, "up"));
+        turns.add(new Turn(420, 200, "right")); //TODO: add three more
     }
 
     private void update() {
 
         train.update();
-        if (train.intersects(railroadSwitch.getBoundingBox())){
+        if (train.intersects(railroadSwitch.getBoundingBox())) {
             railroadSwitch.changeTrainDirection(train);
         }
-        if (train.intersects(turn.getBoundingBox())){
-            train.setDirection(turn.getDirection());
+        for (Turn turn1 : turns) {
+            if (train.intersects(turn1.getBoundingBox())) {
+                train.setDirection(turn1.getDirection());
+            }
         }
+
     }
 
     private void draw() {
@@ -67,10 +74,12 @@ public class Engine implements Runnable {
         graphics.drawImage(backgroundImage, 0, 0, null);
         railroadSwitch.draw(graphics);
         train.draw(this.graphics);
-        turn.draw(graphics);
+        // TODO: delete turns draw
+        for (Turn turn1 : turns) {
+            turn1.draw(graphics);
+        }
 
         this.bufferStrategy.show();
-        graphics.setColor(Color.cyan);
         this.graphics.dispose();
     }
 
