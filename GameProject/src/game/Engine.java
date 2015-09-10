@@ -83,6 +83,10 @@ public class Engine implements Runnable {
         graphics = bufferStrategy.getDrawGraphics();
         graphics.clearRect(0, 0, this.width, this.height);
         graphics.drawImage(backgroundImage, 0, 0, null);
+        for (RailroadSwitch railroadSwitch : railroadSwitches) {
+            railroadSwitch.draw(graphics);
+        }
+
         train.draw(this.graphics);
 
         this.bufferStrategy.show();

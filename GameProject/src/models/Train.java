@@ -61,6 +61,5 @@ public class Train {
 
     public void draw(Graphics graphics) {
         graphics.drawImage(this.trainImage, this.x, this.y, null);
-        graphics.drawRect(boundingBox.x,boundingBox.y,boundingBox.width,boundingBox.height);
     }
 }

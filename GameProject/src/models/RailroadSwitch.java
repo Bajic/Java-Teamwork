@@ -1,6 +1,9 @@
 package models;
 
+import displays.ImageCreator;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class RailroadSwitch {
 
@@ -11,6 +14,7 @@ public class RailroadSwitch {
     private String direction;
     private String oppositeDirection;
 
+    private BufferedImage image;
     private Rectangle boundingBox;
     private Rectangle boundingBoxForClick;
 
@@ -23,6 +27,7 @@ public class RailroadSwitch {
         this.boundingBoxForClick = new Rectangle(clickX, clickY, this.width + 15, this.height + 15);
         this.direction = direction;
         this.oppositeDirection = oppositeDirection;
+        this.setImage(direction);
     }
 
     public Rectangle getBoundingBox() {
@@ -34,6 +39,7 @@ public class RailroadSwitch {
         this.direction = oppositeDirection;
         System.out.println(direction);
         this.oppositeDirection = oldDirection;
+        this.setImage(direction);
     }
 
     public boolean intersects(int mouseX, int mouseY) {
@@ -54,8 +60,25 @@ public class RailroadSwitch {
         train.setDirection(this.direction);
     }
 
+    private void setImage(String direction) {
+        switch (direction) {
+            case "up":
+                this.image = ImageCreator.upArrow;
+                break;
+            case "down":
+                this.image = ImageCreator.downArrow;
+                break;
+            case "left":
+                this.image = ImageCreator.leftArrow;
+                break;
+            case "right":
+                this.image = ImageCreator.rightArrow;
+                break;
+        }
+    }
+
     public void draw(Graphics graphics) {
-       //TODO: add pictures
+        graphics.drawImage(this.image, boundingBoxForClick.x, boundingBoxForClick.y, null);
     }
 
 
