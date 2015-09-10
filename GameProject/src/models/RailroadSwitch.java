@@ -55,8 +55,7 @@ public class RailroadSwitch {
     }
 
     public void draw(Graphics graphics) {
-       graphics.drawRect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
-        //graphics.drawRect(boundingBoxForClick.x, boundingBoxForClick.y, boundingBoxForClick.width, boundingBoxForClick.height);
+       //TODO: add pictures
     }
 
 

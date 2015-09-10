@@ -28,7 +28,7 @@ public class Turn {
         return boundingBox;
     }
 
-    public void draw(Graphics graphics) {
-        graphics.drawRect(x,y,width,height);
-    }
+    //public void draw(Graphics graphics) {
+        //graphics.drawRect(x,y,width,height);
+    //}
 }

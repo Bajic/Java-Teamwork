@@ -1,6 +1,7 @@
 package game;
 
 import displays.Display;
+import models.RailroadSwitch;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,8 +14,10 @@ public class InputMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (Engine.railroadSwitch.intersectsClick(e.getX(),e.getY())){
-            Engine.railroadSwitch.changeDirection();
+        for (RailroadSwitch railroadSwitch : Engine.railroadSwitches) {
+            if (railroadSwitch.intersectsClick(e.getX(),e.getY())){
+                railroadSwitch.changeDirection();
+            }
         }
     }
 
