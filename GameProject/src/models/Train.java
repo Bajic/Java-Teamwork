@@ -1,6 +1,6 @@
 package models;
 
-import displays.ImageCreator;
+import displays.Assets;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,8 +19,8 @@ public class Train {
     public Train() {
         this.x = 140;
         this.y = 540;
-        this.width = 40;
-        this.height = 50;
+        this.width = 10;
+        this.height = 10;
         this.speed = 4;
         this.boundingBox = new Rectangle(this.width, this.height);
         this.direction = "right";
@@ -42,24 +42,25 @@ public class Train {
         switch (direction) {
             case "up":
                 this.y -= this.speed;
-                this.trainImage = ImageCreator.trainUp;
+                this.trainImage = Assets.trainUp;
                 break;
             case "down":
                 this.y += this.speed;
-                this.trainImage = ImageCreator.trainDown;
+                this.trainImage = Assets.trainDown;
                 break;
             case "left":
                 this.x -= this.speed;
-                this.trainImage = ImageCreator.trainLeft;
+                this.trainImage = Assets.trainLeft;
                 break;
             case "right":
                 this.x += this.speed;
-                this.trainImage = ImageCreator.trainRight;
+                this.trainImage = Assets.trainRight;
                 break;
         }
     }
 
-    public void draw(Graphics graphics) {
+    public void draw(Graphics graphics)
+    {
         graphics.drawImage(this.trainImage, this.x, this.y, null);
     }
 }

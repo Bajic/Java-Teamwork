@@ -1,6 +1,6 @@
 package models;
 
-import displays.ImageCreator;
+import displays.Assets;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,7 +9,9 @@ public class RailroadSwitch {
 
     private int x;
     private int y;
+    private int widthForClick;
     private int width;
+    private int heightForClick;
     private int height;
     private String direction;
     private String oppositeDirection;
@@ -18,13 +20,15 @@ public class RailroadSwitch {
     private Rectangle boundingBox;
     private Rectangle boundingBoxForClick;
 
-    public RailroadSwitch(int x, int y, int clickX, int clickY, String direction, String oppositeDirection) {
+    public RailroadSwitch(int x, int y, int width,int height,int clickX, int clickY, String direction, String oppositeDirection) {
         this.x = x;
         this.y = y;
-        this.width = 60;
-        this.height = 60;
+        this.widthForClick = 75;
+        this.width = width;
+        this.heightForClick = 75;
+        this.height = height;
         this.boundingBox = new Rectangle(x, y, this.width, this.height);
-        this.boundingBoxForClick = new Rectangle(clickX, clickY, this.width + 15, this.height + 15);
+        this.boundingBoxForClick = new Rectangle(clickX, clickY, this.widthForClick, this.heightForClick);
         this.direction = direction;
         this.oppositeDirection = oppositeDirection;
         this.setImage(direction);
@@ -63,16 +67,16 @@ public class RailroadSwitch {
     private void setImage(String direction) {
         switch (direction) {
             case "up":
-                this.image = ImageCreator.upArrow;
+                this.image = Assets.upArrow;
                 break;
             case "down":
-                this.image = ImageCreator.downArrow;
+                this.image = Assets.downArrow;
                 break;
             case "left":
-                this.image = ImageCreator.leftArrow;
+                this.image = Assets.leftArrow;
                 break;
             case "right":
-                this.image = ImageCreator.rightArrow;
+                this.image = Assets.rightArrow;
                 break;
         }
     }

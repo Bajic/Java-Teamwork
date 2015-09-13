@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class Turn {
 
-    private final int width = 50;
-    private final int height = 50;
+    private int width ;
+    private int height;
     private int x;
     private int y;
 
@@ -13,8 +13,10 @@ public class Turn {
 
     private Rectangle boundingBox;
 
-    public Turn(int x, int y, String direction) {
+    public Turn(int x, int y,int width, int height, String direction) {
         this.y = y;
+        this.width = width;
+        this.height = height;
         this.x = x;
         this.direction = direction;
         this.boundingBox = new Rectangle(x, y, width, height);
@@ -28,7 +30,8 @@ public class Turn {
         return boundingBox;
     }
 
-    //public void draw(Graphics graphics) {
-        //graphics.drawRect(x,y,width,height);
-    //}
+//    public void draw(Graphics graphics) {
+//        graphics.setColor(Color.red);
+//        graphics.drawRect(x,y,width,height);
+//    }
 }

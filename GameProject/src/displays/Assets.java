@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class ImageCreator {
+public class Assets {
     public static BufferedImage trainLeft;
     public static BufferedImage trainRight;
     public static BufferedImage trainUp;
@@ -31,7 +31,7 @@ public class ImageCreator {
 
     public static BufferedImage load(String path) {
         try {
-            return ImageIO.read(ImageCreator.class.getResource(path));
+            return ImageIO.read(Assets.class.getResource(path));
         } catch (IOException e) {
             e.printStackTrace();
         }

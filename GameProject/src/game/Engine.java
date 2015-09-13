@@ -1,7 +1,7 @@
 package game;
 
 import displays.Display;
-import displays.ImageCreator;
+import displays.Assets;
 import models.RailroadSwitch;
 import models.Train;
 import models.Turn;
@@ -35,25 +35,25 @@ public class Engine implements Runnable {
     }
 
     public void initialize() {
-        ImageCreator.init();
+        Assets.init();
         display = new Display(this.title, this.width, this.height);
-        backgroundImage = ImageCreator.load("/images/background.png");
+        backgroundImage = Assets.load("/images/background.png");
         train = new Train();
         this.mouseListener = new InputMouseListener(this.display);
         railroadSwitches = new RailroadSwitch[7];
-        railroadSwitches[0] = new RailroadSwitch(410, 340, 400, 415, "up", "right");
-        railroadSwitches[1] = new RailroadSwitch(750, 405, 675, 395, "right", "down");
-        railroadSwitches[2] = new RailroadSwitch(505, 700, 555, 690, "left", "up");
-        railroadSwitches[3] = new RailroadSwitch(840, 590, 835, 530, "down", "right");
-        railroadSwitches[4] = new RailroadSwitch(888, 260, 825, 255, "up", "right");
-        railroadSwitches[5] = new RailroadSwitch(595, 260, 525, 255, "up", "right");
-        railroadSwitches[6] = new RailroadSwitch(218, 110, 265, 110, "down", "left");
+        railroadSwitches[0] = new RailroadSwitch(390, 390,100,3, 400, 415, "up", "right");
+        railroadSwitches[1] = new RailroadSwitch(713, 370,3,120, 675, 395, "right", "down");
+        railroadSwitches[2] = new RailroadSwitch(565, 660,3,120, 555, 690, "left", "up");
+        railroadSwitches[3] = new RailroadSwitch(830, 540,120,3, 835, 530, "down", "right");
+        railroadSwitches[4] = new RailroadSwitch(860, 240,3,100, 825, 255, "up", "right");
+        railroadSwitches[5] = new RailroadSwitch(570, 210,3,120, 525, 255, "up", "right");
+        railroadSwitches[6] = new RailroadSwitch(275, 60,3,140, 265, 110, "down", "left");
         this.turns = new Turn[5];
-        turns[0] = new Turn(450, 550, "up");
-        turns[1] = new Turn(420, 200, "right");
-        turns[2] = new Turn(550, 55, "left");
-        turns[3] = new Turn(690, 730, "left");
-        turns[4] = new Turn(890, 410, "down");
+        turns[0] = new Turn(420, 530,3,100, "up");
+        turns[1] = new Turn(420, 245,100,3, "right");
+        turns[2] = new Turn(510, 100,150,3, "left");
+        turns[3] = new Turn(690, 680,100,3, "left");
+        turns[4] = new Turn(860, 370,3,130, "down");
     }
 
     private void update() {
