@@ -9,6 +9,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Engine implements Runnable {
     private String title;
@@ -16,6 +18,7 @@ public class Engine implements Runnable {
     private int height;
     private boolean isRunning;
     private Random random;
+    private Timer timer;
     private Thread thread;
     private Display display;
     private BufferStrategy bufferStrategy;
@@ -39,6 +42,13 @@ public class Engine implements Runnable {
         Assets.init();
         display = new Display(this.title, this.width, this.height);
         this.random = new Random();
+        this.timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                trains.add(new Train(ColorType.values()[random.nextInt(8)]));
+            }
+        }, 4 * 1000, 4 * 1000);
         backgroundImage = Assets.load("/images/background.png");
         trains = new ArrayList<>();
         trains.add(new Train(ColorType.values()[random.nextInt(8)]));
@@ -65,7 +75,7 @@ public class Engine implements Runnable {
             for (Station station : stations) {
                 if (train.intersects(station.getBoundingBox())) {
                     train.setVisible(false);
-                    if (train.getColor().equals(station.getColor())){
+                    if (train.getColor().equals(station.getColor())) {
                         //TODO: score++
                     }
                 }
