@@ -1,7 +1,10 @@
 package game;
 
+import audio.AudioConstants;
+import audio.AudioManager;
 import displays.Display;
 import models.RailroadSwitch;
+import sun.audio.AudioPlayer;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -22,6 +25,7 @@ public class InputMouseListener implements MouseListener {
         for (RailroadSwitch railroadSwitch : Engine.railroadSwitches) {
             if (railroadSwitch.intersectsClick(e.getX(),e.getY())){
                 railroadSwitch.changeDirection();
+                audio.AudioPlayer.playSound(AudioConstants.SWITCH);
             }
         }
     }
