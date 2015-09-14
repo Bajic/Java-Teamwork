@@ -42,19 +42,19 @@ public class Train {
         switch (direction) {
             case "up":
                 this.y -= this.speed;
-                this.trainImage = Assets.trainUp;
+                this.trainImage = Assets.blackGreenTrain[3];
                 break;
             case "down":
                 this.y += this.speed;
-                this.trainImage = Assets.trainDown;
+                this.trainImage = Assets.blackGreenTrain[0];
                 break;
             case "left":
                 this.x -= this.speed;
-                this.trainImage = Assets.trainLeft;
+                this.trainImage = Assets.blackGreenTrain[1];
                 break;
             case "right":
                 this.x += this.speed;
-                this.trainImage = Assets.trainRight;
+                this.trainImage = Assets.blackGreenTrain[2];
                 break;
         }
     }
