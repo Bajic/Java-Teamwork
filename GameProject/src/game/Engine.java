@@ -2,19 +2,20 @@ package game;
 
 import displays.Display;
 import displays.Assets;
-import models.RailroadSwitch;
-import models.Train;
-import models.Turn;
+import models.*;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Engine implements Runnable {
     private String title;
     private int width;
     private int height;
     private boolean isRunning;
+    private Random random;
     private Thread thread;
     private Display display;
     private BufferStrategy bufferStrategy;
@@ -22,8 +23,8 @@ public class Engine implements Runnable {
     private BufferedImage backgroundImage;
     private InputMouseListener mouseListener;
     private Turn[] turns;
-
-    private Train train;
+    private Station[] stations;
+    private ArrayList<Train> trains;
     public static RailroadSwitch[] railroadSwitches;  // Public field!
 
     public Engine(String title, int width, int height) {
@@ -37,37 +38,37 @@ public class Engine implements Runnable {
     public void initialize() {
         Assets.init();
         display = new Display(this.title, this.width, this.height);
+        this.random = new Random();
         backgroundImage = Assets.load("/images/background.png");
-        train = new Train();
+        trains = new ArrayList<>();
+        trains.add(new Train(ColorType.values()[random.nextInt(8)]));
         this.mouseListener = new InputMouseListener(this.display);
-        railroadSwitches = new RailroadSwitch[7];
-        railroadSwitches[0] = new RailroadSwitch(390, 390,100,3, 400, 415, "up", "right");
-        railroadSwitches[1] = new RailroadSwitch(713, 370,3,120, 675, 395, "right", "down");
-        railroadSwitches[2] = new RailroadSwitch(565, 660,3,120, 555, 690, "left", "up");
-        railroadSwitches[3] = new RailroadSwitch(830, 540,120,3, 835, 530, "down", "right");
-        railroadSwitches[4] = new RailroadSwitch(860, 240,3,100, 825, 255, "up", "right");
-        railroadSwitches[5] = new RailroadSwitch(570, 210,3,120, 525, 255, "up", "right");
-        railroadSwitches[6] = new RailroadSwitch(275, 60,3,140, 265, 110, "down", "left");
-        this.turns = new Turn[5];
-        turns[0] = new Turn(420, 530,3,100, "up");
-        turns[1] = new Turn(420, 245,100,3, "right");
-        turns[2] = new Turn(510, 100,150,3, "left");
-        turns[3] = new Turn(690, 680,100,3, "left");
-        turns[4] = new Turn(860, 370,3,130, "down");
+        initRailroadSwitches();
+        initTurns();
+        initStations();
     }
 
     private void update() {
-
-        train.update();
-        for (RailroadSwitch railroadSwitch : railroadSwitches) {
-            if (train.intersects(railroadSwitch.getBoundingBox())) {
-                railroadSwitch.changeTrainDirection(train);
+        for (Train train : trains) {
+            train.update();
+            for (RailroadSwitch railroadSwitch : railroadSwitches) {
+                if (train.intersects(railroadSwitch.getBoundingBox())) {
+                    railroadSwitch.changeTrainDirection(train);
+                }
             }
-        }
+            for (Turn turn1 : turns) {
+                if (train.intersects(turn1.getBoundingBox())) {
+                    train.setDirection(turn1.getDirection());
+                }
+            }
 
-        for (Turn turn1 : turns) {
-            if (train.intersects(turn1.getBoundingBox())) {
-                train.setDirection(turn1.getDirection());
+            for (Station station : stations) {
+                if (train.intersects(station.getBoundingBox())) {
+                    train.setVisible(false);
+                    if (train.getColor().equals(station.getColor())){
+                        //TODO: score++
+                    }
+                }
             }
         }
 
@@ -86,8 +87,9 @@ public class Engine implements Runnable {
         for (RailroadSwitch railroadSwitch : railroadSwitches) {
             railroadSwitch.draw(graphics);
         }
-
-        train.draw(this.graphics);
+        for (Train train : trains) {
+            train.draw(this.graphics);
+        }
 
         this.bufferStrategy.show();
         this.graphics.dispose();
@@ -131,5 +133,39 @@ public class Engine implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initRailroadSwitches() {
+        railroadSwitches = new RailroadSwitch[]{
+                new RailroadSwitch(390, 390, 100, 3, 400, 415, "up", "right"),
+                new RailroadSwitch(713, 370, 3, 120, 675, 395, "right", "down"),
+                new RailroadSwitch(565, 660, 3, 120, 555, 690, "left", "up"),
+                new RailroadSwitch(830, 540, 120, 3, 835, 530, "down", "right"),
+                new RailroadSwitch(860, 240, 3, 100, 825, 255, "up", "right"),
+                new RailroadSwitch(570, 210, 3, 120, 525, 255, "up", "right"),
+                new RailroadSwitch(275, 60, 3, 140, 265, 110, "down", "left")};
+    }
+
+    private void initTurns() {
+        this.turns = new Turn[]{
+                new Turn(420, 530, 3, 100, "up"),
+                new Turn(420, 245, 100, 3, "right"),
+                new Turn(510, 100, 150, 3, "left"),
+                new Turn(690, 680, 100, 3, "left"),
+                new Turn(860, 370, 3, 130, "down")};
+    }
+
+
+    private void initStations() {
+        this.stations = new Station[]{
+                new Station(70, 70, ColorType.white),
+                new Station(250, 185, ColorType.purple),
+                new Station(940, 230, ColorType.blue),
+                new Station(830, 80, ColorType.green),
+                new Station(940, 515, ColorType.black),
+                new Station(834, 620, ColorType.blackGreen),
+                new Station(540, 510, ColorType.yellow),
+                new Station(350, 670, ColorType.red),
+        };
     }
 }

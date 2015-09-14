@@ -14,16 +14,16 @@ public class InputMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         for (RailroadSwitch railroadSwitch : Engine.railroadSwitches) {
             if (railroadSwitch.intersectsClick(e.getX(),e.getY())){
                 railroadSwitch.changeDirection();
             }
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
