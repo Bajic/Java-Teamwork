@@ -41,6 +41,10 @@ public class Train {
         this.visible = visible;
     }
 
+    public boolean getVisible() {
+        return this.visible;
+    }
+
     public void setDirection(String direction) {
         this.direction = direction;
     }
@@ -74,12 +78,12 @@ public class Train {
         }
     }
 
+
     public void draw(Graphics graphics) {
         if (visible) {
             graphics.drawImage(this.trainImage, this.x, this.y, null);
         }
     }
-
 
     private BufferedImage[] getImages(ColorType color) {
         switch (color){

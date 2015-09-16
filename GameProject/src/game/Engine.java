@@ -87,6 +87,9 @@ public class Engine implements Runnable {
                 }
             }
         }
+        for (int i = 0; i < trains.size(); i++) {
+            if (!trains.get(i).getVisible()) trains.remove(i);
+        }
 
     }
 
