@@ -1,10 +1,7 @@
 package game;
 
-import audio.AudioConstants;
-import audio.AudioManager;
-import audio.AudioPlayer;
-import displays.Display;
 import displays.Assets;
+import displays.Display;
 import models.*;
 
 import java.awt.*;
@@ -42,8 +39,6 @@ public class Engine implements Runnable {
     }
 
     public void initialize() {
-        Assets.init();
-        AudioManager.loadSounds();
         display = new Display(this.title, this.width, this.height);
         this.random = new Random();
         this.timer = new Timer();
@@ -60,8 +55,6 @@ public class Engine implements Runnable {
         initRailroadSwitches();
         initTurns();
         initStations();
-
-        AudioPlayer.playMusic(AudioConstants.BACKGROUND_MUSIC);
     }
 
     private void update() {

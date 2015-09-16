@@ -1,29 +1,29 @@
 package gui;
 
+import audio.AudioConstants;
+import audio.AudioManager;
+import audio.AudioPlayer;
+import displays.Assets;
+import game.Engine;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import game.Engine;
-import displays.Assets;
 
 public class MenuScreen extends JFrame {
     private static final java.lang.Object HOW_TO_PLAY_MESSAGE = "Use the left mouse button to switch the direction of the tracks.\n" +
             "Guide each train toward the station with the same color.";;
-
-    public MenuScreen() {
-
-        initUI();
+    private Engine engine;
+    public MenuScreen(Engine engine) {
+        this.engine = engine;
+        init();
     }
 
-    public final void initUI() {
+    public final void init() {
         Assets.init();
-
+        AudioManager.loadSounds();
+        AudioPlayer.playMusic(AudioConstants.BACKGROUND_MUSIC);
         JPanel panel = new ImagePanel();
         panel.setLayout(null);
 
@@ -43,7 +43,6 @@ public class MenuScreen extends JFrame {
         startGameButton.setFont(new Font("Arial", Font.BOLD, 22));
         startGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                Engine engine = new Engine("Train of Thought", 1137, 790);
                 engine.start();
             }
         });
