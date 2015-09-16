@@ -1,5 +1,7 @@
 package game;
 
+import audio.AudioConstants;
+import audio.AudioPlayer;
 import displays.Assets;
 import displays.Display;
 import models.*;
@@ -55,6 +57,8 @@ public class Engine implements Runnable {
         initRailroadSwitches();
         initTurns();
         initStations();
+
+        AudioPlayer.playMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
     }
 
     private void update() {

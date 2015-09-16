@@ -21,9 +21,10 @@ public class MenuScreen extends JFrame {
     }
 
     public final void init() {
-        Assets.init();
         AudioManager.loadSounds();
-        AudioPlayer.playMusic(AudioConstants.BACKGROUND_MUSIC);
+        AudioPlayer.playMusic(AudioConstants.BACKGROUND_MENU_MUSIC);
+        Assets.init();
+
         JPanel panel = new ImagePanel();
         panel.setLayout(null);
 
@@ -43,6 +44,7 @@ public class MenuScreen extends JFrame {
         startGameButton.setFont(new Font("Arial", Font.BOLD, 22));
         startGameButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                AudioPlayer.playSound(AudioConstants.MENU_BUTTONS_SOUND);
                 engine.start();
             }
         });
@@ -53,7 +55,7 @@ public class MenuScreen extends JFrame {
         highScoreButton.setFont(new Font("Arial", Font.BOLD, 22));
         highScoreButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-
+                AudioPlayer.playSound(AudioConstants.MENU_BUTTONS_SOUND);
             }
         });
 
@@ -63,6 +65,7 @@ public class MenuScreen extends JFrame {
         howToPlayButton.setFont(new Font("Arial", Font.BOLD, 22));
         howToPlayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                AudioPlayer.playSound(AudioConstants.MENU_BUTTONS_SOUND);
                 JOptionPane.showMessageDialog(panel, HOW_TO_PLAY_MESSAGE, "How to Play",
                         JOptionPane.INFORMATION_MESSAGE);
             }
@@ -74,6 +77,7 @@ public class MenuScreen extends JFrame {
         quitButton.setFont(new Font("Arial", Font.BOLD, 22));
         quitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
+                AudioPlayer.playSound(AudioConstants.MENU_BUTTONS_SOUND);
                 System.exit(0);
             }
         });
