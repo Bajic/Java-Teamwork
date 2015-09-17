@@ -115,16 +115,23 @@ public class Engine implements Runnable {
     public void run() {
 
         initialize();
+
+        int fps = 30;
+        double ticksPerFrame = 1_000_000_000 / fps;
+        double delta = 0;
+        long now;
+        long lastTimeTicked = System.nanoTime();
+
         while (isRunning) {
-            //TODO: calculate fps and remove thread sleep
-            try {
-                Thread.sleep(30);
+            now = System.nanoTime();
+            delta += (now - lastTimeTicked) / ticksPerFrame;
+            lastTimeTicked = now;
+
+            if (delta >= 1) {
                 update();
                 draw();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                delta--;
             }
-
         }
 
         stop();
