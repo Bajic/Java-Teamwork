@@ -6,4 +6,3 @@ public class GameMain {
         engine.start();
     }
 }
-

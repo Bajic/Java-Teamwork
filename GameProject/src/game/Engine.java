@@ -7,7 +7,10 @@ import displays.Display;
 import displays.Assets;
 import models.*;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -31,32 +34,45 @@ public class Engine implements Runnable {
     private Turn[] turns;
     private Station[] stations;
     private ArrayList<Train> trains;
+    private ArrayList<Train> trainsToRemove;
+    private Player player;
     public static RailroadSwitch[] railroadSwitches;  // Public field!
+
 
     public Engine(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
         this.isRunning = false;
-
+        this.player = new Player("Gosho");
     }
 
     public void initialize() {
         Assets.init();
+
         AudioManager.loadSounds();
+
         display = new Display(this.title, this.width, this.height);
+
         this.random = new Random();
         this.timer = new Timer();
+
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 trains.add(new Train(ColorType.values()[random.nextInt(8)]));
             }
         }, 4 * 1000, 4 * 1000);
+
         backgroundImage = Assets.load("/images/background.png");
+
         trains = new ArrayList<>();
         trains.add(new Train(ColorType.values()[random.nextInt(8)]));
+
+        trainsToRemove = new ArrayList<>();
+
         this.mouseListener = new InputMouseListener(this.display);
+
         initRailroadSwitches();
         initTurns();
         initStations();
@@ -65,8 +81,10 @@ public class Engine implements Runnable {
     }
 
     private void update() {
+
         for (Train train : trains) {
             train.update();
+
             for (RailroadSwitch railroadSwitch : railroadSwitches) {
                 if (train.intersects(railroadSwitch.getBoundingBox())) {
                     railroadSwitch.changeTrainDirection(train);
@@ -80,14 +98,25 @@ public class Engine implements Runnable {
 
             for (Station station : stations) {
                 if (train.intersects(station.getBoundingBox())) {
-                    train.setVisible(false);
+
                     if (train.getColor().equals(station.getColor())) {
-                        //TODO: score++
+                        this.player.setScore(1);
+                    } else {
+                        this.player.removeLife();
+                        if (this.player.getLives() == 0){
+                            System.out.println(this.player.getLives());
+                            this.stop();
+                        }
                     }
+
+                    this.trainsToRemove.add(train);
+                    train.setVisible(false);
                 }
             }
         }
 
+        this.trains.removeAll(trainsToRemove);
+        trainsToRemove.clear();
     }
 
     private void draw() {
@@ -97,12 +126,15 @@ public class Engine implements Runnable {
             display.getCanvas().createBufferStrategy(2);
             return;
         }
+
         graphics = bufferStrategy.getDrawGraphics();
         graphics.clearRect(0, 0, this.width, this.height);
         graphics.drawImage(backgroundImage, 0, 0, null);
+
         for (RailroadSwitch railroadSwitch : railroadSwitches) {
             railroadSwitch.draw(graphics);
         }
+
         for (Train train : trains) {
             train.draw(this.graphics);
         }
@@ -124,7 +156,6 @@ public class Engine implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
 
         stop();
@@ -143,7 +174,9 @@ public class Engine implements Runnable {
         if (!isRunning) {
             return;
         }
+
         this.isRunning = false;
+
         try {
             thread.join();
         } catch (InterruptedException e) {
