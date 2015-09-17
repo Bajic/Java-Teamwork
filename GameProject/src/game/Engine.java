@@ -160,13 +160,13 @@ public class Engine implements Runnable {
 
     private void initRailroadSwitches() {
         railroadSwitches = new RailroadSwitch[]{
-                new RailroadSwitch(390, 390, 100, 3, 400, 415, "up", "right"),
-                new RailroadSwitch(713, 370, 3, 120, 675, 395, "right", "down"),
+                new RailroadSwitch(390, 390, 60, 3, 400, 415, "up", "right"),
+                new RailroadSwitch(713, 370, 3, 40, 675, 395, "right", "down"),
                 new RailroadSwitch(565, 660, 3, 120, 555, 690, "left", "up"),
-                new RailroadSwitch(830, 540, 120, 3, 835, 530, "down", "right"),
+                new RailroadSwitch(830, 540, 50, 3, 835, 530, "down", "right"),
                 new RailroadSwitch(860, 240, 3, 100, 825, 255, "up", "right"),
-                new RailroadSwitch(570, 210, 3, 120, 525, 255, "up", "right"),
-                new RailroadSwitch(275, 60, 3, 140, 265, 110, "down", "left")};
+                new RailroadSwitch(570, 240, 3, 120, 525, 255, "up", "right"),
+                new RailroadSwitch(275, 60, 3, 60, 265, 110, "down", "left")};
     }
 
     private void initTurns() {
