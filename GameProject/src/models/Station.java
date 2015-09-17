@@ -9,14 +9,14 @@ public class Station {
 
     private Rectangle boundingBox;
 
-    public Station(int x,int y, ColorType color) {
+    public Station(int x, int y, ColorType color) {
         this.x = x;
         this.y = y;
         this.color = color;
-        this.boundingBox = new Rectangle(this.x,this.y,100,100);
+        this.boundingBox = new Rectangle(this.x, this.y, 100, 100);
     }
 
-    public ColorType getColor(){
+    public ColorType getColor() {
         return this.color;
     }
 

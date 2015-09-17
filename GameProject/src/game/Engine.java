@@ -101,11 +101,12 @@ public class Engine implements Runnable {
 
                     if (train.getColor().equals(station.getColor())) {
                         this.player.setScore(1);
+                        System.out.println("score: " + this.player.getScore());
                     } else {
                         this.player.removeLife();
-                        if (this.player.getLives() == 0){
-                            System.out.println(this.player.getLives());
-                            this.stop();
+                        System.out.println("lives left: " + this.player.getLives());
+                        if (this.player.getLives() == 0) {
+                            stop();
                         }
                     }
 
@@ -116,7 +117,10 @@ public class Engine implements Runnable {
         }
 
         this.trains.removeAll(trainsToRemove);
+
         trainsToRemove.clear();
+
+
     }
 
     private void draw() {

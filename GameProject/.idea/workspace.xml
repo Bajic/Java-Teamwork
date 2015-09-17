@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e833433e-2cd0-4291-b082-7e32e90b30af" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/Engine.java" afterPath="$PROJECT_DIR$/src/game/Engine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/GameMain.java" afterPath="$PROJECT_DIR$/src/game/GameMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Station.java" afterPath="$PROJECT_DIR$/src/models/Station.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/Train.java" afterPath="$PROJECT_DIR$/src/models/Train.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="GameProject.iws" />
@@ -28,21 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GameMain.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/game/GameMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2902439">
-              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="62" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Engine.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Engine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/game/Engine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="25" selection-start-line="108" selection-start-column="25" selection-end-line="108" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.6219512">
+              <caret line="108" column="35" selection-start-line="108" selection-start-column="35" selection-end-line="108" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -52,10 +53,10 @@
         <entry file="file://$PROJECT_DIR$/src/models/Station.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+              <caret line="15" column="67" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
               <folding>
-                <element signature="e#386#387#0" expanded="true" />
-                <element signature="e#419#420#0" expanded="true" />
+                <element signature="e#391#392#0" expanded="true" />
+                <element signature="e#424#425#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/src/models/Player.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="23" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="23" />
+              <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
               <folding>
                 <element signature="e#327#328#0" expanded="true" />
                 <element signature="e#362#363#0" expanded="true" />
@@ -84,7 +85,7 @@
         <entry file="file://$PROJECT_DIR$/src/models/Train.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -158,16 +159,16 @@
         <option value="$PROJECT_DIR$/src/models/RailroadSwitch.java" />
         <option value="$PROJECT_DIR$/src/displays/Assets.java" />
         <option value="$PROJECT_DIR$/src/models/Colors.java" />
-        <option value="$PROJECT_DIR$/src/models/Station.java" />
         <option value="$PROJECT_DIR$/src/audio/AudioConstants.java" />
         <option value="$PROJECT_DIR$/src/audio/AudioManager.java" />
         <option value="$PROJECT_DIR$/src/audio/AudioPlayer.java" />
         <option value="$PROJECT_DIR$/src/game/InputMouseListener.java" />
         <option value="$PROJECT_DIR$/src/game/InputKeyListener.java" />
         <option value="$PROJECT_DIR$/src/models/Player.java" />
-        <option value="$PROJECT_DIR$/src/models/Train.java" />
-        <option value="$PROJECT_DIR$/src/game/Engine.java" />
         <option value="$PROJECT_DIR$/src/game/GameMain.java" />
+        <option value="$PROJECT_DIR$/src/models/Train.java" />
+        <option value="$PROJECT_DIR$/src/models/Station.java" />
+        <option value="$PROJECT_DIR$/src/game/Engine.java" />
       </list>
     </option>
   </component>
@@ -239,6 +240,20 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="GameProject" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GameProject" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -475,6 +490,13 @@
       <workItem from="1442298555295" duration="34000" />
       <workItem from="1442298636720" duration="1447000" />
     </task>
+    <task id="LOCAL-00001" summary="- added player&#10;- added player lives and score&#10;- game stops when player lives reach 0&#10;- trains are removed from drawing list when they reach a station">
+      <created>1442499074652</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1442499074652</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -532,6 +554,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- added player&#10;- added player lives and score&#10;- game stops when player lives reach 0&#10;- trains are removed from drawing list when they reach a station" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added player&#10;- added player lives and score&#10;- game stops when player lives reach 0&#10;- trains are removed from drawing list when they reach a station" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -864,18 +890,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Train.java">
+    <entry file="file://$PROJECT_DIR$/src/models/Station.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
-          <folding />
+          <caret line="15" column="67" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
+          <folding>
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="23" />
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
           <folding>
             <element signature="e#327#328#0" expanded="true" />
             <element signature="e#362#363#0" expanded="true" />
@@ -889,29 +918,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/Station.java">
+    <entry file="file://$PROJECT_DIR$/src/models/Train.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding>
-            <element signature="e#386#387#0" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/game/Engine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="25" selection-start-line="108" selection-start-column="25" selection-end-line="108" selection-end-column="25" />
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/game/GameMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2902439">
-          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="62" selection-start-line="4" selection-start-column="53" selection-end-line="4" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/game/Engine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6219512">
+          <caret line="108" column="35" selection-start-line="108" selection-start-column="35" selection-end-line="108" selection-end-column="35" />
           <folding />
         </state>
       </provider>
