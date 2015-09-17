@@ -25,7 +25,7 @@ public class Train {
         this.y = 540;
         this.width = 10;
         this.height = 10;
-        this.speed = 6;
+        this.speed = 4;
         this.boundingBox = new Rectangle(this.width, this.height);
         this.direction = "right";
         visible = true;
@@ -39,6 +39,10 @@ public class Train {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public boolean getVisible() {
+        return this.visible;
     }
 
     public void setDirection(String direction) {
@@ -74,12 +78,12 @@ public class Train {
         }
     }
 
+
     public void draw(Graphics graphics) {
         if (visible) {
             graphics.drawImage(this.trainImage, this.x, this.y, null);
         }
     }
-
 
     private BufferedImage[] getImages(ColorType color) {
         switch (color){

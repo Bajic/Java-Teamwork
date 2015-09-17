@@ -21,6 +21,7 @@ public class Assets {
     public static void init() {
         BufferedImage sheet = load("/images/TrainsModels.png");
 
+
         redTrain = new BufferedImage[]{sheet.getSubimage(36, 10, 40, 95), sheet.getSubimage(12, 136, 90, 60)
                 , sheet.getSubimage(12, 232, 90, 60), sheet.getSubimage(35, 300, 40, 90)};
         yellowTrain = new BufferedImage[]{sheet.getSubimage(131, 9, 40, 95), sheet.getSubimage(107, 139, 90, 60)

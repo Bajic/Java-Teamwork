@@ -2,8 +2,9 @@ package audio;
 
 public class AudioManager {
     public static void loadSounds() {
-        AudioPlayer.addSound(AudioConstants.SWITCH, AudioConstants.SWITCH_PATH);
-
-        AudioPlayer.addMusic(AudioConstants.BACKGROUND_MUSIC, AudioConstants.BACKGROUND_MUSIC_PATH);
+        AudioPlayer.addBackgroundMusic(AudioConstants.BACKGROUND_MENU_MUSIC, AudioConstants.BACKGROUND_MENU_MUSIC_PATH);
+        AudioPlayer.addBackgroundMusic(AudioConstants.BACKGROUND_GAME_MUSIC, AudioConstants.BACKGROUND_GAME_MUSIC_PATH);
+        AudioPlayer.addGameSounds(AudioConstants.MENU_BUTTONS_SOUND, AudioConstants.MENU_BUTTONS_SOUND_PATH);
+        AudioPlayer.addGameSounds(AudioConstants.SWITCH, AudioConstants.SWITCH_PATH);
     }
 }

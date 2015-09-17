@@ -41,7 +41,6 @@ public class RailroadSwitch {
     public void changeDirection() {
         String oldDirection = this.direction;
         this.direction = oppositeDirection;
-        System.out.println(direction);
         this.oppositeDirection = oldDirection;
         this.setImage(direction);
     }

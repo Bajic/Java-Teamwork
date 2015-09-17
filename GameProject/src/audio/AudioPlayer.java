@@ -8,40 +8,47 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AudioPlayer {
-    private static Map<String, Sound> soundMap = new HashMap<>();
 
-    private static Map<String, Music> musicMap = new HashMap<>();
+    private static Map<String, Music> backgroundMusic = new HashMap<>();
 
-    public static void addSound(String key, String path) {
-            try {
-                soundMap.put(key, new Sound(path));
-            } catch (SlickException e) {
-                e.printStackTrace();
-            }
-    }
+    private static Map<String, Sound> gameSoundEffectsMap = new HashMap<>();
 
-    public static void addMusic(String key, String path) {
+    public static void addBackgroundMusic(String key, String path) {
         try {
-            musicMap.put(key, new Music(path));
+            backgroundMusic.put(key, new Music(path));
         } catch (SlickException e) {
             e.printStackTrace();
         }
     }
 
-    public static Sound getSound(String key) {
-        return soundMap.get(key);
-    }
-
-    public static Music getMusic(String key) {
-        return musicMap.get(key);
+    public static void addGameSounds(String key, String path) {
+        try {
+            gameSoundEffectsMap.put(key, new Sound(path));
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void playSound(String key) {
-        soundMap.get(key).play();
+        switch (key) {
+            case AudioConstants.MENU_BUTTONS_SOUND:
+                gameSoundEffectsMap.get(key).play();
+                break;
+            case AudioConstants.SWITCH:
+                gameSoundEffectsMap.get(key).play();
+                break;
+        }
+
     }
 
     public static void playMusic(String key) {
-        musicMap.get(key).loop();
+        switch (key) {
+            case AudioConstants.BACKGROUND_MENU_MUSIC:
+                backgroundMusic.get(key).loop();
+                break;
+            case AudioConstants.BACKGROUND_GAME_MUSIC:
+                backgroundMusic.get(key).loop();
+                break;
+        }
     }
-
 }
