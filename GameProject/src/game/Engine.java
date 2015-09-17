@@ -44,7 +44,7 @@ public class Engine implements Runnable {
         this.width = width;
         this.height = height;
         this.isRunning = false;
-        this.player = new Player("Gosho");
+        this.player = new Player("didok4o");
     }
 
     public void initialize() {
@@ -62,7 +62,7 @@ public class Engine implements Runnable {
             public void run() {
                 trains.add(new Train(ColorType.values()[random.nextInt(8)]));
             }
-        }, 4 * 1000, 4 * 1000);
+        }, 2 * 1000, 3 * 1000);
 
         backgroundImage = Assets.load("/images/background.png");
 
@@ -106,6 +106,7 @@ public class Engine implements Runnable {
                         this.player.removeLife();
                         System.out.println("lives left: " + this.player.getLives());
                         if (this.player.getLives() == 0) {
+                            System.out.println("Game Over, " + this.player.getName() + ". Your score is " + this.player.getScore() + ".");
                             stop();
                         }
                     }
@@ -196,6 +197,7 @@ public class Engine implements Runnable {
         }
     }
 
+    // TODO: move initialization in a separate class
     private void initRailroadSwitches() {
         railroadSwitches = new RailroadSwitch[]{
                 new RailroadSwitch(390, 390, 60, 3, 400, 415, "up", "right"),

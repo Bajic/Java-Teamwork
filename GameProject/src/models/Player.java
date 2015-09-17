@@ -9,7 +9,9 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.score = 0;
-        this.lives = 5;
+        this.lives = 3;
+
+        // TODO: gain 1 life every X points
     }
 
     public long getScore() {
@@ -29,7 +31,7 @@ public class Player {
     }
 
     public void gameOver() {
-
+        // TODO: think of a useful function for this
     }
 
     public String getName() {

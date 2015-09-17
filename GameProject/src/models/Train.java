@@ -25,7 +25,7 @@ public class Train {
         this.y = 540;
         this.width = 10;
         this.height = 10;
-        this.speed = 4;
+        this.speed = 2;
         this.boundingBox = new Rectangle(this.width, this.height);
         this.direction = "right";
         visible = true;
