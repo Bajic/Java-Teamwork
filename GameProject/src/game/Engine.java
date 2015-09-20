@@ -6,6 +6,7 @@ import audio.AudioPlayer;
 import displays.Assets;
 import displays.Display;
 import models.*;
+import org.newdawn.slick.openal.Audio;
 
 import javax.swing.*;
 import java.awt.*;
@@ -100,12 +101,20 @@ public class Engine implements Runnable {
                 if (train.intersects(station.getBoundingBox())) {
 
                     if (train.getColor().equals(station.getColor())) {
+                        AudioPlayer.playSound(AudioConstants.RIGHT_STATION);
                         this.player.setScore(1);
                         System.out.println("score: " + this.player.getScore());
                     } else {
                         this.player.removeLife();
+                        if (this.player.getLives() > 0) {
+                            AudioPlayer.playSound(AudioConstants.WRONG_STATION);
+                        }
+
                         System.out.println("lives left: " + this.player.getLives());
                         if (this.player.getLives() == 0) {
+                            AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
+                            AudioPlayer.playSound(AudioConstants.GAME_OVER);
+
                             System.out.println("Game Over, " + this.player.getName() + ". Your score is " + this.player.getScore() + ".");
                             stop();
                         }

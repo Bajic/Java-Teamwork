@@ -37,6 +37,14 @@ public class AudioPlayer {
             case AudioConstants.SWITCH:
                 gameSoundEffectsMap.get(key).play();
                 break;
+            case AudioConstants.RIGHT_STATION:
+                gameSoundEffectsMap.get(key).play();
+                break;
+            case AudioConstants.WRONG_STATION:
+                gameSoundEffectsMap.get(key).play();
+                break;
+            case AudioConstants.GAME_OVER:
+                gameSoundEffectsMap.get(key).play();
         }
 
     }
@@ -50,5 +58,9 @@ public class AudioPlayer {
                 backgroundMusic.get(key).loop();
                 break;
         }
+    }
+
+    public static void stopMusic(String key) {
+        backgroundMusic.get(key).stop();
     }
 }
