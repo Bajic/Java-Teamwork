@@ -207,6 +207,14 @@ public class Engine implements Runnable {
                 new RailroadSwitch(860, 240, 3, 100, 825, 255, "up", "right"),
                 new RailroadSwitch(570, 240, 3, 120, 525, 255, "up", "right"),
                 new RailroadSwitch(275, 60, 3, 60, 265, 110, "down", "left")};
+
+//                new RailroadSwitch(390, 390, 60, 3, 385, 390, "vertical", "se"),
+//                new RailroadSwitch(713, 370, 3, 40, 670, 385, "horizontal", "sw"),
+//                new RailroadSwitch(565, 660, 3, 120, 555, 690, "left", "up"),
+//                new RailroadSwitch(830, 540, 50, 3, 835, 530, "down", "right"),
+//                new RailroadSwitch(860, 240, 3, 100, 825, 255, "up", "right"),
+//                new RailroadSwitch(570, 240, 3, 120, 525, 255, "up", "right"),
+//                new RailroadSwitch(275, 60, 3, 60, 265, 110, "down", "left")};
     }
 
     private void initTurns() {
