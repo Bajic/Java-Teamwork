@@ -21,11 +21,12 @@ import java.util.TimerTask;
 
 public class Engine implements Runnable {
     private Difficulty difficulty;
+    private double timeAdjuster;
     private String title;
     private int width;
     private int height;
     private boolean isRunning;
-    private Random random;
+    public Random random;
     private Timer timer;
     private Thread thread;
     private Display display;
@@ -35,11 +36,11 @@ public class Engine implements Runnable {
     private InputMouseListener mouseListener;
     private Turn[] turns;
     private Station[] stations;
-    private ArrayList<Train> trains;
-    private ArrayList<Train> trainsToRemove;
     private Player player;
+    public ArrayList<Train> trains;
+    private ArrayList<Train> trainsToRemove;
     public static RailroadSwitch[] railroadSwitches;  // Public field!
-
+    private TrainFactory factory;
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -47,11 +48,14 @@ public class Engine implements Runnable {
         this.height = height;
         this.isRunning = false;
         this.difficulty = Difficulty.EASY;
+        this.timeAdjuster = DifficultyMultiplier.EASY;
         this.player = new Player("didok4o");
+        this.factory = new TrainFactory(this);
     }
 
     public void initialize() {
         Assets.init();
+        backgroundImage = Assets.load("/images/background.png");
 
         AudioManager.loadSounds();
 
@@ -60,33 +64,15 @@ public class Engine implements Runnable {
         this.random = new Random();
         this.timer = new Timer();
 
+        trains = new ArrayList<>();
+        trainsToRemove = new ArrayList<>();
+
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                double trainSpeed = GlobalConstants.TRAIN_SPEED;
-
-                switch (Engine.this.difficulty) {
-                    case EASY:
-                        trainSpeed *= DifficultyMultiplier.EASY;
-                        break;
-                    case MEDIUM:
-                        trainSpeed *= DifficultyMultiplier.MEDIUM;
-                        break;
-                    case HARD:
-                        trainSpeed *= DifficultyMultiplier.HARD;
-                        break;
-                }
-
-                trains.add(new Train(ColorType.values()[random.nextInt(8)], trainSpeed));
+                factory.ProduceTrain(difficulty);
             }
-        }, 2 * 1000, 4 * 1000);
-
-        backgroundImage = Assets.load("/images/background.png");
-
-        trains = new ArrayList<>();
-        trains.add(new Train(ColorType.values()[random.nextInt(8)], GlobalConstants.TRAIN_SPEED));
-
-        trainsToRemove = new ArrayList<>();
+        }, 1500, (int) (1500 * 2 / timeAdjuster));
 
         this.mouseListener = new InputMouseListener(this.display);
 
@@ -122,18 +108,22 @@ public class Engine implements Runnable {
                         this.player.setScore(1);
                         System.out.println("score: " + this.player.getScore());
 
-                        if (this.player.getScore() % 50 == 0) {
+                        if (this.player.getScore() % 30 == 0) {
                             this.player.receiveLife();
                             System.out.println("Here! Get a life!");
                         }
 
                         if (this.player.getScore() <= 75) {
-                            if (this.player.getScore() == 30) {
+                            if (this.player.getScore() == 25) {
                                 this.difficulty = Difficulty.MEDIUM;
+                                this.timeAdjuster = DifficultyMultiplier.MEDIUM;
+                                System.out.println("timer: " + this.timeAdjuster);
                             }
 
-                            if (this.player.getScore() == 75) {
+                            if (this.player.getScore() == 50) {
                                 this.difficulty = Difficulty.HARD;
+                                this.timeAdjuster = DifficultyMultiplier.HARD;
+                                System.out.println("timer: " + this.timeAdjuster);
                             }
                         }
 
