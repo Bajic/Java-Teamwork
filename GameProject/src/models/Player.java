@@ -33,8 +33,8 @@ public class Player {
         this.lives += 1;
     }
 
-    public void gameOver() {
-        // TODO: think of a useful function for this
+    public boolean isAlive() {
+        return this.lives > 0;
     }
 
     public String getName() {

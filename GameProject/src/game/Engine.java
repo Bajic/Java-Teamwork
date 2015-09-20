@@ -5,11 +5,13 @@ import audio.AudioManager;
 import audio.AudioPlayer;
 import displays.Assets;
 import displays.Display;
+import javafx.scene.text.*;
 import models.*;
 import org.newdawn.slick.openal.Audio;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
@@ -84,76 +86,79 @@ public class Engine implements Runnable {
     }
 
     private void update() {
+        if (!this.player.isAlive()) {
+            stop();
+        } else {
 
-        for (Train train : trains) {
-            train.update();
+            for (Train train : trains) {
+                train.update();
 
-            for (RailroadSwitch railroadSwitch : railroadSwitches) {
-                if (train.intersects(railroadSwitch.getBoundingBox())) {
-                    railroadSwitch.changeTrainDirection(train);
-                }
-            }
-            for (Turn turn1 : turns) {
-                if (train.intersects(turn1.getBoundingBox())) {
-                    train.setDirection(turn1.getDirection());
-                }
-            }
-
-            for (Station station : stations) {
-                if (train.intersects(station.getBoundingBox())) {
-
-                    if (train.getColor().equals(station.getColor())) {
-                        AudioPlayer.playSound(AudioConstants.RIGHT_STATION);
-
-                        this.player.setScore(1);
-                        System.out.println("score: " + this.player.getScore());
-
-                        if (this.player.getScore() % 30 == 0) {
-                            this.player.receiveLife();
-                            System.out.println("Here! Get a life!");
-                        }
-
-                        if (this.player.getScore() <= 75) {
-                            if (this.player.getScore() == 25) {
-                                this.difficulty = Difficulty.MEDIUM;
-                                this.timeAdjuster = DifficultyMultiplier.MEDIUM;
-                                System.out.println("timer: " + this.timeAdjuster);
-                            }
-
-                            if (this.player.getScore() == 50) {
-                                this.difficulty = Difficulty.HARD;
-                                this.timeAdjuster = DifficultyMultiplier.HARD;
-                                System.out.println("timer: " + this.timeAdjuster);
-                            }
-                        }
-
-                    } else {
-                        this.player.removeLife();
-
-                        if (this.player.getLives() > 0) {
-                            AudioPlayer.playSound(AudioConstants.WRONG_STATION);
-                        }
-
-                        System.out.println("lives left: " + this.player.getLives());
-
-                        if (this.player.getLives() == 0) {
-                            AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
-                            AudioPlayer.playSound(AudioConstants.GAME_OVER);
-
-                            System.out.println("Game Over, " + this.player.getName() + ". Your score is " + this.player.getScore() + ".");
-                            stop();
-                        }
+                for (RailroadSwitch railroadSwitch : railroadSwitches) {
+                    if (train.intersects(railroadSwitch.getBoundingBox())) {
+                        railroadSwitch.changeTrainDirection(train);
                     }
+                }
+                for (Turn turn1 : turns) {
+                    if (train.intersects(turn1.getBoundingBox())) {
+                        train.setDirection(turn1.getDirection());
+                    }
+                }
 
-                    this.trainsToRemove.add(train);
-                    train.setVisible(false);
+                for (Station station : stations) {
+                    if (train.intersects(station.getBoundingBox())) {
+
+                        if (train.getColor().equals(station.getColor())) {
+                            AudioPlayer.playSound(AudioConstants.RIGHT_STATION);
+
+                            this.player.setScore(1);
+                            System.out.println("score: " + this.player.getScore());
+
+                            if (this.player.getScore() % 30 == 0) {
+                                this.player.receiveLife();
+                                System.out.println("Here! Get a life!");
+                            }
+
+                            if (this.player.getScore() <= 75) {
+                                if (this.player.getScore() == 25) {
+                                    this.difficulty = Difficulty.MEDIUM;
+                                    this.timeAdjuster = DifficultyMultiplier.MEDIUM;
+                                    System.out.println("timer: " + this.timeAdjuster);
+                                }
+
+                                if (this.player.getScore() == 50) {
+                                    this.difficulty = Difficulty.HARD;
+                                    this.timeAdjuster = DifficultyMultiplier.HARD;
+                                    System.out.println("timer: " + this.timeAdjuster);
+                                }
+                            }
+
+                        } else {
+                            this.player.removeLife();
+
+                            if (this.player.getLives() > 0) {
+                                AudioPlayer.playSound(AudioConstants.WRONG_STATION);
+                            }
+
+                            System.out.println("lives left: " + this.player.getLives());
+
+                            if (this.player.getLives() == 0) {
+                                AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
+                                AudioPlayer.playSound(AudioConstants.GAME_OVER);
+
+                                System.out.println("Game Over, " + this.player.getName() + ". Your score is " + this.player.getScore() + ".");
+                            }
+                        }
+
+                        this.trainsToRemove.add(train);
+                        train.setVisible(false);
+                    }
                 }
             }
+
+            this.trains.removeAll(trainsToRemove);
+
+            trainsToRemove.clear();
         }
-
-        this.trains.removeAll(trainsToRemove);
-
-        trainsToRemove.clear();
     }
 
     private void draw() {
@@ -167,6 +172,12 @@ public class Engine implements Runnable {
         graphics = bufferStrategy.getDrawGraphics();
         graphics.clearRect(0, 0, this.width, this.height);
         graphics.drawImage(backgroundImage, 0, 0, null);
+
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(new Font("default", Font.BOLD, 24));
+        graphics.drawString(this.player.getName(), 860, 35);
+        graphics.drawString("Score: " + this.player.getScore(), 980, 35);
+        graphics.drawString("Lives: " + this.player.getLives(), 720, 35);
 
         for (RailroadSwitch railroadSwitch : railroadSwitches) {
             railroadSwitch.draw(graphics);
