@@ -55,7 +55,7 @@ public class Engine implements Runnable {
 
     public void initialize() {
         Assets.init();
-        backgroundImage = Assets.load("/images/background.png");
+        backgroundImage = Assets.load("/images/background2.png");
 
         AudioManager.loadSounds();
 
