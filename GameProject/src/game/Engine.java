@@ -20,6 +20,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Engine implements Runnable {
+    private Difficulty difficulty;
     private String title;
     private int width;
     private int height;
@@ -45,6 +46,7 @@ public class Engine implements Runnable {
         this.width = width;
         this.height = height;
         this.isRunning = false;
+        this.difficulty = Difficulty.EASY;
         this.player = new Player("didok4o");
     }
 
@@ -61,14 +63,28 @@ public class Engine implements Runnable {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                trains.add(new Train(ColorType.values()[random.nextInt(8)]));
+                double trainSpeed = GlobalConstants.TRAIN_SPEED;
+
+                switch (Engine.this.difficulty) {
+                    case EASY:
+                        trainSpeed *= DifficultyMultiplier.EASY;
+                        break;
+                    case MEDIUM:
+                        trainSpeed *= DifficultyMultiplier.MEDIUM;
+                        break;
+                    case HARD:
+                        trainSpeed *= DifficultyMultiplier.HARD;
+                        break;
+                }
+
+                trains.add(new Train(ColorType.values()[random.nextInt(8)], trainSpeed));
             }
-        }, 2 * 1000, 3 * 1000);
+        }, 2 * 1000, 4 * 1000);
 
         backgroundImage = Assets.load("/images/background.png");
 
         trains = new ArrayList<>();
-        trains.add(new Train(ColorType.values()[random.nextInt(8)]));
+        trains.add(new Train(ColorType.values()[random.nextInt(8)], GlobalConstants.TRAIN_SPEED));
 
         trainsToRemove = new ArrayList<>();
 
@@ -102,15 +118,34 @@ public class Engine implements Runnable {
 
                     if (train.getColor().equals(station.getColor())) {
                         AudioPlayer.playSound(AudioConstants.RIGHT_STATION);
+
                         this.player.setScore(1);
                         System.out.println("score: " + this.player.getScore());
+
+                        if (this.player.getScore() % 50 == 0) {
+                            this.player.receiveLife();
+                            System.out.println("Here! Get a life!");
+                        }
+
+                        if (this.player.getScore() <= 75) {
+                            if (this.player.getScore() == 30) {
+                                this.difficulty = Difficulty.MEDIUM;
+                            }
+
+                            if (this.player.getScore() == 75) {
+                                this.difficulty = Difficulty.HARD;
+                            }
+                        }
+
                     } else {
                         this.player.removeLife();
+
                         if (this.player.getLives() > 0) {
                             AudioPlayer.playSound(AudioConstants.WRONG_STATION);
                         }
 
                         System.out.println("lives left: " + this.player.getLives());
+
                         if (this.player.getLives() == 0) {
                             AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
                             AudioPlayer.playSound(AudioConstants.GAME_OVER);
@@ -129,8 +164,6 @@ public class Engine implements Runnable {
         this.trains.removeAll(trainsToRemove);
 
         trainsToRemove.clear();
-
-
     }
 
     private void draw() {

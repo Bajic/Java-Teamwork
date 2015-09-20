@@ -10,7 +10,7 @@ public class Train {
     private BufferedImage[] images;
     private int x;
     private int y;
-    private int speed;
+    private double speed;
     private int width;
     private int height;
     private String direction;
@@ -20,12 +20,12 @@ public class Train {
 
     private Rectangle boundingBox;
 
-    public Train(ColorType color) {
+    public Train(ColorType color, double speed) {
         this.x = 140;
         this.y = 540;
         this.width = 10;
         this.height = 10;
-        this.speed = 2;
+        this.speed = speed;
         this.boundingBox = new Rectangle(this.width, this.height);
         this.direction = "right";
         visible = true;

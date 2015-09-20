@@ -18,6 +18,13 @@ public class Assets {
     public static BufferedImage rightArrow;
     public static BufferedImage leftArrow;
 
+    public static BufferedImage nw;
+    public static BufferedImage se;
+    public static BufferedImage sw;
+    public static BufferedImage wn;
+    public static BufferedImage horizontal;
+    public static BufferedImage vertical;
+
     public static void init() {
         BufferedImage sheet = load("/images/TrainsModels.png");
 
@@ -43,6 +50,14 @@ public class Assets {
         downArrow = load("/images/downArrow.png");
         rightArrow = load("/images/rightArrow.png");
         leftArrow = load("/images/leftArrow.png");
+
+
+        nw = load("/images/nw.png");
+        se= load("/images/se.png");
+        sw= load("/images/sw.png");
+        wn= load("/images/wn.png");
+        horizontal= load("/images/horizontal.png");
+        vertical= load("/images/vertical.png");
 
     }
 

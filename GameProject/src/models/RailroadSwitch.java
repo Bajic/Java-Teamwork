@@ -77,6 +77,24 @@ public class RailroadSwitch {
             case "right":
                 this.image = Assets.rightArrow;
                 break;
+            case "nw":
+                this.image = Assets.nw;
+                break;
+            case "se":
+                this.image = Assets.se;
+                break;
+            case "sw":
+                this.image = Assets.sw;
+                break;
+            case "wn":
+                this.image = Assets.wn;
+                break;
+            case "horizontal":
+                this.image = Assets.horizontal;
+                break;
+            case "vertical":
+                this.image = Assets.vertical;
+                break;
         }
     }
 

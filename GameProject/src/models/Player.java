@@ -29,6 +29,9 @@ public class Player {
     public void removeLife() {
         this.lives -= 1;
     }
+    public void receiveLife() {
+        this.lives += 1;
+    }
 
     public void gameOver() {
         // TODO: think of a useful function for this
