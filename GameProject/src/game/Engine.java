@@ -8,15 +8,10 @@ import displays.Display;
 import displays.GameOverDialog;
 import models.*;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,7 +22,6 @@ public class Engine implements Runnable {
     private int width;
     private int height;
     private boolean isRunning;
-    public Random random;
     private Timer timer;
     private Thread thread;
     private Display display;
@@ -38,10 +32,9 @@ public class Engine implements Runnable {
     private Turn[] turns;
     private Station[] stations;
     private Player player;
-    public ArrayList<Train> trains;
+    private ArrayList<Train> trains;
     private ArrayList<Train> trainsToRemove;
     public static RailroadSwitch[] railroadSwitches;  // Public field!
-    private TrainFactory factory;
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -51,7 +44,6 @@ public class Engine implements Runnable {
         this.difficulty = Difficulty.EASY;
         this.timeAdjuster = DifficultyMultiplier.EASY;
         this.player = new Player("didok4o");
-        this.factory = new TrainFactory(this);
     }
 
     public void initialize() {
@@ -62,7 +54,6 @@ public class Engine implements Runnable {
 
         display = new Display(this.title, this.width, this.height);
 
-        this.random = new Random();
         this.timer = new Timer();
 
         trains = new ArrayList<>();
@@ -71,7 +62,7 @@ public class Engine implements Runnable {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                factory.ProduceTrain(difficulty);
+                trains.add(TrainFactory.ProduceTrain(difficulty));
             }
         }, 1500, (int) (1500 * 2 / timeAdjuster));
 
@@ -191,11 +182,7 @@ public class Engine implements Runnable {
         graphics.clearRect(0, 0, this.width, this.height);
         graphics.drawImage(backgroundImage, 0, 0, null);
 
-        graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("default", Font.BOLD, 45));
-        //graphics.drawString(this.player.getName(), 1070, 3);
-        graphics.drawString("" + this.player.getScore(), 1065, 48);
-        graphics.drawString("" + this.player.getLives(), 958, 70);
+        drawGameStats();
 
         for (RailroadSwitch railroadSwitch : railroadSwitches) {
             railroadSwitch.draw(graphics);
@@ -207,6 +194,14 @@ public class Engine implements Runnable {
 
         this.bufferStrategy.show();
         this.graphics.dispose();
+    }
+
+    private void drawGameStats() {
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(new Font("default", Font.BOLD, 45));
+        //graphics.drawString(this.player.getName(), 1070, 3);
+        graphics.drawString("" + this.player.getScore(), 1065, 48);
+        graphics.drawString("" + this.player.getLives(), 958, 70);
     }
 
     // TODO: move initialization in a separate class
