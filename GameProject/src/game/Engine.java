@@ -5,6 +5,7 @@ import audio.AudioManager;
 import audio.AudioPlayer;
 import displays.Assets;
 import displays.Display;
+import displays.GameOverDialog;
 import models.*;
 
 import javax.swing.*;
@@ -84,55 +85,42 @@ public class Engine implements Runnable {
     }
 
     private void update() {
-        if (!this.player.isAlive()) {
-            stop();
-        } else {
-
-            for (Train train : trains) {
-                train.update();
-
-                for (RailroadSwitch railroadSwitch : railroadSwitches) {
-                    if (train.intersects(railroadSwitch.getBoundingBox())) {
-                        railroadSwitch.changeTrainDirection(train);
-                    }
-                }
-                for (Turn turn1 : turns) {
-                    if (train.intersects(turn1.getBoundingBox())) {
-                        train.setDirection(turn1.getDirection());
-                    }
-                }
-
-                for (Station station : stations) {
-                    if (train.intersects(station.getBoundingBox())) {
-
-                        if (train.getColor().equals(station.getColor())) {
-                            AudioPlayer.playSound(AudioConstants.RIGHT_STATION);
-
-                            this.player.setScore(1);
-                            System.out.println("score: " + this.player.getScore());
-
-                            updateGameSpeed();
-
-                        } else {
-                            this.player.removeLife();
-
-                            if (this.player.getLives() > 0) {
-                                AudioPlayer.playSound(AudioConstants.WRONG_STATION);
-                            } else {
-                                gameOver();
-                            }
-                        }
-
-                        this.trainsToRemove.add(train);
-                        train.setVisible(false);
-                    }
+        for (Train train : trains) {
+            train.update();
+            for (RailroadSwitch railroadSwitch : railroadSwitches) {
+                if (train.intersects(railroadSwitch.getBoundingBox())) {
+                    railroadSwitch.changeTrainDirection(train);
                 }
             }
+            for (Turn turn1 : turns) {
+                if (train.intersects(turn1.getBoundingBox())) {
+                    train.setDirection(turn1.getDirection());
+                }
+            }
+            for (Station station : stations) {
+                if (train.intersects(station.getBoundingBox())) {
 
-            this.trains.removeAll(trainsToRemove);
+                    if (train.getColor().equals(station.getColor())) {
+                        AudioPlayer.playSound(AudioConstants.RIGHT_STATION);
+                        this.player.setScore(1);
+                        updateGameSpeed();
 
-            trainsToRemove.clear();
+                    } else {
+                        this.player.removeLife();
+
+                        if (this.player.getLives() > 0) {
+                            AudioPlayer.playSound(AudioConstants.WRONG_STATION);
+                        } else {
+                            gameOver();
+                        }
+                    }
+                    this.trainsToRemove.add(train);
+                    train.setVisible(false);
+                }
+            }
         }
+        this.trains.removeAll(trainsToRemove);
+        trainsToRemove.clear();
     }
 
     @Override
@@ -187,24 +175,8 @@ public class Engine implements Runnable {
     private void gameOver() {
         AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
         AudioPlayer.playSound(AudioConstants.GAME_OVER);
-        JDialog d = new JDialog();
-        d.setTitle("GAME OVER");
-        d.setVisible(true);
-        d.setSize(300, 100);
-        d.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        d.setLocationRelativeTo(null);
-        d.setResizable(false);
-        Button b = new Button("play again");
-        b.setSize(30, 40);
-        b.setVisible(true);
-        b.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO: close old window
-                GameMain.main(new String[]{});
-            }
-        });
-        d.add(b);
+        new GameOverDialog();
+        stop();
     }
 
     private void draw() {
