@@ -31,7 +31,7 @@ public class Turn {
     }
 
 //    public void draw(Graphics graphics) {
-//        graphics.setColor(Color.red);
+//        graphics.setColor(Color.RED);
 //        graphics.drawRect(x,y,width,height);
 //    }
 }

@@ -87,21 +87,21 @@ public class Train {
 
     private BufferedImage[] getImages(ColorType color) {
         switch (color){
-            case black:
+            case BLACK:
                 return Assets.blackTrain;
-            case white:
+            case WHITE:
                 return Assets.whiteTrain;
-            case red:
+            case RED:
                 return Assets.redTrain;
-            case blackGreen:
+            case BLACK_GREEN:
                 return Assets.blackGreenTrain;
-            case blue:
+            case BLUE:
                 return Assets.blueTrain;
-            case yellow:
+            case YELLOW:
                 return Assets.yellowTrain;
-            case green:
+            case GREEN:
                 return Assets.greenTrain;
-            case purple:
+            case PURPLE:
                 return Assets.purpleTrain;
         }
         return null;

@@ -1,12 +1,12 @@
 package models;
 
 public enum ColorType {
-    red,
-    blue,
-    yellow,
-    white,
-    black,
-    blackGreen,
-    purple,
-    green
+    RED,
+    BLUE,
+    YELLOW,
+    WHITE,
+    BLACK,
+    BLACK_GREEN,
+    PURPLE,
+    GREEN
 }

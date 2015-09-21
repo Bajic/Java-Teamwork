@@ -5,15 +5,10 @@ import audio.AudioManager;
 import audio.AudioPlayer;
 import displays.Assets;
 import displays.Display;
-import javafx.scene.text.*;
 import models.*;
-import org.newdawn.slick.openal.Audio;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.Font;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -57,7 +52,7 @@ public class Engine implements Runnable {
 
     public void initialize() {
         Assets.init();
-        backgroundImage = Assets.load("/images/background2.png");
+        backgroundImage = Assets.load("/images/backgroundScoreLifes.png");
 
         AudioManager.loadSounds();
 
@@ -174,10 +169,10 @@ public class Engine implements Runnable {
         graphics.drawImage(backgroundImage, 0, 0, null);
 
         graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("default", Font.BOLD, 24));
-        graphics.drawString(this.player.getName(), 860, 35);
-        graphics.drawString("Score: " + this.player.getScore(), 980, 35);
-        graphics.drawString("Lives: " + this.player.getLives(), 720, 35);
+        graphics.setFont(new Font("default", Font.BOLD, 45));
+        //graphics.drawString(this.player.getName(), 1070, 3);
+        graphics.drawString("" + this.player.getScore(), 1065, 48);
+        graphics.drawString(""+this.player.getLives(), 958, 70);
 
         for (RailroadSwitch railroadSwitch : railroadSwitches) {
             railroadSwitch.draw(graphics);
@@ -272,14 +267,14 @@ public class Engine implements Runnable {
 
     private void initStations() {
         this.stations = new Station[]{
-                new Station(70, 70, ColorType.white),
-                new Station(250, 185, ColorType.purple),
-                new Station(940, 230, ColorType.blue),
-                new Station(830, 80, ColorType.green),
-                new Station(940, 515, ColorType.black),
-                new Station(834, 620, ColorType.blackGreen),
-                new Station(540, 510, ColorType.yellow),
-                new Station(350, 670, ColorType.red),
+                new Station(70, 70, ColorType.WHITE),
+                new Station(250, 185, ColorType.PURPLE),
+                new Station(940, 230, ColorType.BLUE),
+                new Station(830, 80, ColorType.GREEN),
+                new Station(940, 515, ColorType.BLACK),
+                new Station(834, 620, ColorType.BLACK_GREEN),
+                new Station(540, 510, ColorType.YELLOW),
+                new Station(350, 670, ColorType.RED),
         };
     }
 }
