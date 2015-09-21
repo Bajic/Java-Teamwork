@@ -7,8 +7,11 @@ import displays.Assets;
 import displays.Display;
 import models.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -108,39 +111,15 @@ public class Engine implements Runnable {
                             this.player.setScore(1);
                             System.out.println("score: " + this.player.getScore());
 
-                            if (this.player.getScore() % 30 == 0) {
-                                this.player.receiveLife();
-                                System.out.println("Here! Get a life!");
-                            }
-
-                            if (this.player.getScore() <= 75) {
-                                if (this.player.getScore() == 25) {
-                                    this.difficulty = Difficulty.MEDIUM;
-                                    this.timeAdjuster = DifficultyMultiplier.MEDIUM;
-                                    System.out.println("timer: " + this.timeAdjuster);
-                                }
-
-                                if (this.player.getScore() == 50) {
-                                    this.difficulty = Difficulty.HARD;
-                                    this.timeAdjuster = DifficultyMultiplier.HARD;
-                                    System.out.println("timer: " + this.timeAdjuster);
-                                }
-                            }
+                            updateGameSpeed();
 
                         } else {
                             this.player.removeLife();
 
                             if (this.player.getLives() > 0) {
                                 AudioPlayer.playSound(AudioConstants.WRONG_STATION);
-                            }
-
-                            System.out.println("lives left: " + this.player.getLives());
-
-                            if (this.player.getLives() == 0) {
-                                AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
-                                AudioPlayer.playSound(AudioConstants.GAME_OVER);
-
-                                System.out.println("Game Over, " + this.player.getName() + ". Your score is " + this.player.getScore() + ".");
+                            } else {
+                                gameOver();
                             }
                         }
 
@@ -154,36 +133,6 @@ public class Engine implements Runnable {
 
             trainsToRemove.clear();
         }
-    }
-
-    private void draw() {
-        this.bufferStrategy = display.getCanvas().getBufferStrategy();
-
-        if (bufferStrategy == null) {
-            display.getCanvas().createBufferStrategy(2);
-            return;
-        }
-
-        graphics = bufferStrategy.getDrawGraphics();
-        graphics.clearRect(0, 0, this.width, this.height);
-        graphics.drawImage(backgroundImage, 0, 0, null);
-
-        graphics.setColor(Color.BLACK);
-        graphics.setFont(new Font("default", Font.BOLD, 45));
-        //graphics.drawString(this.player.getName(), 1070, 3);
-        graphics.drawString("" + this.player.getScore(), 1065, 48);
-        graphics.drawString(""+this.player.getLives(), 958, 70);
-
-        for (RailroadSwitch railroadSwitch : railroadSwitches) {
-            railroadSwitch.draw(graphics);
-        }
-
-        for (Train train : trains) {
-            train.draw(this.graphics);
-        }
-
-        this.bufferStrategy.show();
-        this.graphics.dispose();
     }
 
     @Override
@@ -235,6 +184,59 @@ public class Engine implements Runnable {
         }
     }
 
+    private void gameOver() {
+        AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
+        AudioPlayer.playSound(AudioConstants.GAME_OVER);
+        JDialog d = new JDialog();
+        d.setTitle("GAME OVER");
+        d.setVisible(true);
+        d.setSize(300, 100);
+        d.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        d.setLocationRelativeTo(null);
+        d.setResizable(false);
+        Button b = new Button("play again");
+        b.setSize(30, 40);
+        b.setVisible(true);
+        b.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //TODO: close old window
+                GameMain.main(new String[]{});
+            }
+        });
+        d.add(b);
+    }
+
+    private void draw() {
+        this.bufferStrategy = display.getCanvas().getBufferStrategy();
+
+        if (bufferStrategy == null) {
+            display.getCanvas().createBufferStrategy(2);
+            return;
+        }
+
+        graphics = bufferStrategy.getDrawGraphics();
+        graphics.clearRect(0, 0, this.width, this.height);
+        graphics.drawImage(backgroundImage, 0, 0, null);
+
+        graphics.setColor(Color.BLACK);
+        graphics.setFont(new Font("default", Font.BOLD, 45));
+        //graphics.drawString(this.player.getName(), 1070, 3);
+        graphics.drawString("" + this.player.getScore(), 1065, 48);
+        graphics.drawString("" + this.player.getLives(), 958, 70);
+
+        for (RailroadSwitch railroadSwitch : railroadSwitches) {
+            railroadSwitch.draw(graphics);
+        }
+
+        for (Train train : trains) {
+            train.draw(this.graphics);
+        }
+
+        this.bufferStrategy.show();
+        this.graphics.dispose();
+    }
+
     // TODO: move initialization in a separate class
     private void initRailroadSwitches() {
         railroadSwitches = new RailroadSwitch[]{
@@ -264,6 +266,26 @@ public class Engine implements Runnable {
                 new Turn(860, 370, 3, 130, "down")};
     }
 
+    private void updateGameSpeed() {
+        if (this.player.getScore() % 30 == 0) {
+            this.player.receiveLife();
+            System.out.println("Here! Get a life!");
+        }
+
+        if (this.player.getScore() <= 75) {
+            if (this.player.getScore() == 25) {
+                this.difficulty = Difficulty.MEDIUM;
+                this.timeAdjuster = DifficultyMultiplier.MEDIUM;
+                System.out.println("timer: " + this.timeAdjuster);
+            }
+
+            if (this.player.getScore() == 50) {
+                this.difficulty = Difficulty.HARD;
+                this.timeAdjuster = DifficultyMultiplier.HARD;
+                System.out.println("timer: " + this.timeAdjuster);
+            }
+        }
+    }
 
     private void initStations() {
         this.stations = new Station[]{
