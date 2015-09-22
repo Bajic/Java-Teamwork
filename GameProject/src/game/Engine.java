@@ -198,7 +198,7 @@ public class Engine implements Runnable {
         graphics.setColor(Color.BLACK);
         graphics.setFont(new Font("default", Font.BOLD, 45));
         //graphics.drawString(this.player.getName(), 1070, 3);
-        graphics.drawString("" + this.player.getScore(), player.getScore() > 10 ? 1047 : 1064, 48);
+        graphics.drawString("" + this.player.getScore(), player.getScore() > 9 ? 1047 : 1064, 48);
         graphics.setFont(new Font("default", Font.BOLD, 55));
         graphics.drawString("" + this.player.getLives(), 955, 75);
     }
@@ -238,19 +238,16 @@ public class Engine implements Runnable {
             this.player.receiveLife();
             System.out.println("Here! Get a life!");
         }
+        if (this.player.getScore() == 10) {
+            this.difficulty = Difficulty.MEDIUM;
+            this.timeAdjuster = DifficultyMultiplier.MEDIUM;
+            System.out.println("timer: " + this.timeAdjuster);
+        }
 
-        if (this.player.getScore() <= 75) {
-            if (this.player.getScore() == 25) {
-                this.difficulty = Difficulty.MEDIUM;
-                this.timeAdjuster = DifficultyMultiplier.MEDIUM;
-                System.out.println("timer: " + this.timeAdjuster);
-            }
-
-            if (this.player.getScore() == 50) {
-                this.difficulty = Difficulty.HARD;
-                this.timeAdjuster = DifficultyMultiplier.HARD;
-                System.out.println("timer: " + this.timeAdjuster);
-            }
+        if (this.player.getScore() == 20) {
+            this.difficulty = Difficulty.HARD;
+            this.timeAdjuster = DifficultyMultiplier.HARD;
+            System.out.println("timer: " + this.timeAdjuster);
         }
     }
 
