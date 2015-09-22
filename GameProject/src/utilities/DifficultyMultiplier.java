@@ -1,4 +1,4 @@
-package game;
+package utilities;
 
 public final class DifficultyMultiplier {
     public static final double EASY = 1;

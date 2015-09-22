@@ -6,9 +6,10 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
-class ImagePanel extends JPanel {
+public class ImagePanel extends JPanel {
     //Image test = new ImageIcon()
     BufferedImage bg = Assets.load("/images/backgroundTest.png");
+
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(bg, 0, 0, getWidth(), getHeight(), this);

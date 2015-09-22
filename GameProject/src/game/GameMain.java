@@ -1,6 +1,7 @@
 package game;
 
-import gui.MenuScreen;
+import displays.MenuScreen;
+import utilities.GlobalConstants;
 
 public class GameMain {
     public static void main(String[] args) {

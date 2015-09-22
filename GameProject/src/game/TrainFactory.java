@@ -1,7 +1,10 @@
 package game;
 
-import models.ColorType;
+import enums.ColorType;
+import enums.Difficulty;
 import models.Train;
+import utilities.DifficultyMultiplier;
+import utilities.GlobalConstants;
 
 public class TrainFactory {
 

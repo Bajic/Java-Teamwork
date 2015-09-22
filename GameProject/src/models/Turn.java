@@ -1,5 +1,7 @@
 package models;
 
+import enums.Directions;
+
 import java.awt.*;
 
 public class Turn {

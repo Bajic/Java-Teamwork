@@ -6,7 +6,11 @@ import audio.AudioPlayer;
 import displays.Assets;
 import displays.Display;
 import displays.GameOverDialog;
+import enums.ColorType;
+import enums.Difficulty;
+import enums.Directions;
 import models.*;
+import utilities.DifficultyMultiplier;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;

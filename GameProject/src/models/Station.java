@@ -1,5 +1,7 @@
 package models;
 
+import enums.ColorType;
+
 import java.awt.*;
 
 public class Station {

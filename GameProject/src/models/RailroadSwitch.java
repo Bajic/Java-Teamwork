@@ -1,6 +1,7 @@
 package models;
 
 import displays.Assets;
+import enums.Directions;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

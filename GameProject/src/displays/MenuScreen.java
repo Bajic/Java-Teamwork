@@ -1,10 +1,10 @@
-package gui;
+package displays;
 
 import audio.AudioConstants;
 import audio.AudioManager;
 import audio.AudioPlayer;
-import displays.Assets;
 import game.Engine;
+import gui.ImagePanel;
 
 import javax.swing.*;
 import java.awt.*;
