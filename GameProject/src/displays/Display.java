@@ -39,4 +39,8 @@ public class Display {
         return this.canvas;
     }
 
+    public void closeFrame(){
+        this.frame.dispose();
+    }
+
 }

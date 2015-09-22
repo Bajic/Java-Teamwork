@@ -34,7 +34,7 @@ public class Engine implements Runnable {
     private Player player;
     private ArrayList<Train> trains;
     private ArrayList<Train> trainsToRemove;
-    private RailroadSwitch[] railroadSwitches;
+    private ArrayList<RailroadSwitch> railroadSwitches;
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -46,7 +46,7 @@ public class Engine implements Runnable {
         this.player = new Player("didok4o");
     }
 
-    public RailroadSwitch[] getRailroadSwitches() {
+    public Iterable<RailroadSwitch> getRailroadSwitches() {
         return railroadSwitches;
     }
 
@@ -159,6 +159,7 @@ public class Engine implements Runnable {
     private void gameOver() {
         AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
         AudioPlayer.playSound(AudioConstants.GAME_OVER);
+        this.display.closeFrame();
         new GameOverDialog();
         stop();
     }
@@ -193,20 +194,22 @@ public class Engine implements Runnable {
         graphics.setColor(Color.BLACK);
         graphics.setFont(new Font("default", Font.BOLD, 45));
         //graphics.drawString(this.player.getName(), 1070, 3);
-        graphics.drawString("" + this.player.getScore(), 1065, 48);
-        graphics.drawString("" + this.player.getLives(), 958, 70);
+        graphics.drawString("" + this.player.getScore(), player.getScore() > 10 ? 1047 : 1064, 48);
+        graphics.setFont(new Font("default", Font.BOLD, 55));
+        graphics.drawString("" + this.player.getLives(), 955, 75);
     }
 
     // TODO: move initialization in a separate class
     private void initRailroadSwitches() {
-        railroadSwitches = new RailroadSwitch[]{
-                new RailroadSwitch(390, 390, 60, 3, 400, 415, "up", "right"),
-                new RailroadSwitch(713, 370, 3, 40, 675, 395, "right", "down"),
-                new RailroadSwitch(565, 660, 3, 120, 555, 690, "left", "up"),
-                new RailroadSwitch(830, 540, 50, 3, 835, 530, "down", "right"),
-                new RailroadSwitch(860, 240, 3, 100, 825, 255, "up", "right"),
-                new RailroadSwitch(570, 240, 3, 120, 525, 255, "up", "right"),
-                new RailroadSwitch(275, 60, 3, 60, 265, 110, "down", "left")};
+        railroadSwitches = new ArrayList<RailroadSwitch>() {{
+            add(new RailroadSwitch(390, 390, 60, 3, 400, 415, "up", "right"));
+            add(new RailroadSwitch(713, 370, 3, 40, 675, 395, "right", "down"));
+            add(new RailroadSwitch(565, 660, 3, 120, 555, 690, "left", "up"));
+            add(new RailroadSwitch(830, 540, 50, 3, 835, 530, "down", "right"));
+            add(new RailroadSwitch(860, 240, 3, 100, 825, 255, "up", "right"));
+            add(new RailroadSwitch(570, 240, 3, 120, 525, 255, "up", "right"));
+            add(new RailroadSwitch(275, 60, 3, 60, 265, 110, "down", "left"));
+        }};
 
 //                new RailroadSwitch(390, 390, 60, 3, 385, 390, "vertical", "se"),
 //                new RailroadSwitch(713, 370, 3, 40, 670, 385, "horizontal", "sw"),

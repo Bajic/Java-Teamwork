@@ -44,6 +44,7 @@ public class MenuScreen extends JFrame {
         startGameButton.addActionListener(event -> {
             AudioPlayer.playSound(AudioConstants.MENU_BUTTONS_SOUND);
             engine.start();
+            this.dispose();
         });
 
         //HIGHSCORE
