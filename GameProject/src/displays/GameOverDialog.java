@@ -29,6 +29,7 @@ public class GameOverDialog extends JFrame {
         playAgainButton.setBounds(50, 470, 350, 50);
         playAgainButton.setFont(new Font("Arial", Font.BOLD, 22));
         playAgainButton.addActionListener(e -> {
+            this.dispose();
             GameMain.main(new String[]{});
         });
 

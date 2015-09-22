@@ -13,7 +13,7 @@ public class Train {
     private double speed;
     private int width;
     private int height;
-    private String direction;
+    private Directions direction;
     private ColorType color;
 
     private boolean visible; //TODO: make Enum direction
@@ -27,7 +27,7 @@ public class Train {
         this.height = 10;
         this.speed = speed;
         this.boundingBox = new Rectangle(this.width, this.height);
-        this.direction = "right";
+        this.direction = Directions.RIGHT;
         visible = true;
         this.color = color;
         this.images = getImages(color);
@@ -45,7 +45,7 @@ public class Train {
         return this.visible;
     }
 
-    public void setDirection(String direction) {
+    public void setDirection(Directions direction) {
         this.direction = direction;
     }
 
@@ -59,19 +59,19 @@ public class Train {
     public void update() {
         this.boundingBox.setBounds(this.x, this.y, this.width, this.height);
         switch (direction) {
-            case "up":
+            case UP:
                 this.y -= this.speed;
                 this.trainImage = images[3];
                 break;
-            case "down":
+            case DOWN:
                 this.y += this.speed;
                 this.trainImage = images[0];
                 break;
-            case "left":
+            case LEFT:
                 this.x -= this.speed;
                 this.trainImage = images[1];
                 break;
-            case "right":
+            case RIGHT:
                 this.x += this.speed;
                 this.trainImage = images[2];
                 break;

@@ -13,14 +13,14 @@ public class RailroadSwitch {
     private int width;
     private int heightForClick;
     private int height;
-    private String direction;
-    private String oppositeDirection;
+    private Directions direction;
+    private Directions oppositeDirection;
 
     private BufferedImage image;
     private Rectangle boundingBox;
     private Rectangle boundingBoxForClick;
 
-    public RailroadSwitch(int x, int y, int width,int height,int clickX, int clickY, String direction, String oppositeDirection) {
+    public RailroadSwitch(int x, int y, int width,int height,int clickX, int clickY, Directions direction, Directions oppositeDirection) {
         this.x = x;
         this.y = y;
         this.widthForClick = 75;
@@ -39,7 +39,7 @@ public class RailroadSwitch {
     }
 
     public void changeDirection() {
-        String oldDirection = this.direction;
+        Directions oldDirection = this.direction;
         this.direction = oppositeDirection;
         this.oppositeDirection = oldDirection;
         this.setImage(direction);
@@ -63,38 +63,38 @@ public class RailroadSwitch {
         train.setDirection(this.direction);
     }
 
-    private void setImage(String direction) {
+    private void setImage(Directions direction) {
         switch (direction) {
-            case "up":
+            case UP:
                 this.image = Assets.upArrow;
                 break;
-            case "down":
+            case DOWN:
                 this.image = Assets.downArrow;
                 break;
-            case "left":
+            case LEFT:
                 this.image = Assets.leftArrow;
                 break;
-            case "right":
+            case RIGHT:
                 this.image = Assets.rightArrow;
                 break;
-            case "nw":
-                this.image = Assets.nw;
-                break;
-            case "se":
-                this.image = Assets.se;
-                break;
-            case "sw":
-                this.image = Assets.sw;
-                break;
-            case "wn":
-                this.image = Assets.wn;
-                break;
-            case "horizontal":
-                this.image = Assets.horizontal;
-                break;
-            case "vertical":
-                this.image = Assets.vertical;
-                break;
+//            case "nw":
+//                this.image = Assets.nw;
+//                break;
+//            case "se":
+//                this.image = Assets.se;
+//                break;
+//            case "sw":
+//                this.image = Assets.sw;
+//                break;
+//            case "wn":
+//                this.image = Assets.wn;
+//                break;
+//            case "horizontal":
+//                this.image = Assets.horizontal;
+//                break;
+//            case "vertical":
+//                this.image = Assets.vertical;
+//                break;
         }
     }
 

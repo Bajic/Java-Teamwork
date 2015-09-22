@@ -9,11 +9,11 @@ public class Turn {
     private int x;
     private int y;
 
-    private String direction;
+    private Directions direction;
 
     private Rectangle boundingBox;
 
-    public Turn(int x, int y,int width, int height, String direction) {
+    public Turn(int x, int y,int width, int height, Directions direction) {
         this.y = y;
         this.width = width;
         this.height = height;
@@ -22,7 +22,7 @@ public class Turn {
         this.boundingBox = new Rectangle(x, y, width, height);
     }
 
-    public String getDirection() {
+    public Directions getDirection() {
         return direction;
     }
 

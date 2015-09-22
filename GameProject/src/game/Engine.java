@@ -202,13 +202,13 @@ public class Engine implements Runnable {
     // TODO: move initialization in a separate class
     private void initRailroadSwitches() {
         railroadSwitches = new ArrayList<RailroadSwitch>() {{
-            add(new RailroadSwitch(390, 390, 60, 3, 400, 415, "up", "right"));
-            add(new RailroadSwitch(713, 370, 3, 40, 675, 395, "right", "down"));
-            add(new RailroadSwitch(565, 660, 3, 120, 555, 690, "left", "up"));
-            add(new RailroadSwitch(830, 540, 50, 3, 835, 530, "down", "right"));
-            add(new RailroadSwitch(860, 240, 3, 100, 825, 255, "up", "right"));
-            add(new RailroadSwitch(570, 240, 3, 120, 525, 255, "up", "right"));
-            add(new RailroadSwitch(275, 60, 3, 60, 265, 110, "down", "left"));
+            add(new RailroadSwitch(390, 390, 60, 3, 400, 415, Directions.UP, Directions.RIGHT));
+            add(new RailroadSwitch(713, 370, 3, 40, 675, 395, Directions.RIGHT, Directions.DOWN));
+            add(new RailroadSwitch(565, 660, 3, 120, 555, 690, Directions.LEFT, Directions.UP));
+            add(new RailroadSwitch(830, 540, 50, 3, 835, 530, Directions.DOWN, Directions.RIGHT));
+            add(new RailroadSwitch(860, 240, 3, 100, 825, 255, Directions.UP, Directions.RIGHT));
+            add(new RailroadSwitch(570, 240, 3, 120, 525, 255, Directions.UP, Directions.RIGHT));
+            add(new RailroadSwitch(275, 60, 3, 60, 265, 110, Directions.DOWN, Directions.LEFT));
         }};
 
 //                new RailroadSwitch(390, 390, 60, 3, 385, 390, "vertical", "se"),
@@ -222,11 +222,11 @@ public class Engine implements Runnable {
 
     private void initTurns() {
         this.turns = new Turn[]{
-                new Turn(420, 530, 3, 100, "up"),
-                new Turn(420, 245, 100, 3, "right"),
-                new Turn(510, 100, 150, 3, "left"),
-                new Turn(690, 680, 100, 3, "left"),
-                new Turn(860, 370, 3, 130, "down")};
+                new Turn(420, 530, 3, 100, Directions.UP),
+                new Turn(420, 245, 100, 3, Directions.RIGHT),
+                new Turn(510, 100, 150, 3, Directions.LEFT),
+                new Turn(690, 680, 100, 3, Directions.LEFT),
+                new Turn(860, 370, 3, 130, Directions.DOWN)};
     }
 
     private void updateGameSpeed() {
