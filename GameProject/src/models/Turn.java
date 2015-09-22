@@ -29,9 +29,4 @@ public class Turn {
     public Rectangle getBoundingBox() {
         return boundingBox;
     }
-
-//    public void draw(Graphics graphics) {
-//        graphics.setColor(Color.RED);
-//        graphics.drawRect(x,y,width,height);
-//    }
 }

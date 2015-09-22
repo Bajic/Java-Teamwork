@@ -1,18 +1,19 @@
 package game;
 
 import audio.AudioConstants;
-import audio.AudioManager;
 import displays.Display;
 import models.RailroadSwitch;
-import sun.audio.AudioPlayer;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class InputMouseListener implements MouseListener {
 
-    public InputMouseListener(Display display) {
+    private Engine engine;
+    public InputMouseListener(Display display, Engine engine)
+    {
         display.getCanvas().addMouseListener(this);
+        this.engine = engine;
     }
 
     @Override
@@ -22,7 +23,7 @@ public class InputMouseListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        for (RailroadSwitch railroadSwitch : Engine.railroadSwitches) {
+        for (RailroadSwitch railroadSwitch : engine.getRailroadSwitches()) {
             if (railroadSwitch.intersectsClick(e.getX(),e.getY())){
                 railroadSwitch.changeDirection();
                 audio.AudioPlayer.playSound(AudioConstants.SWITCH);

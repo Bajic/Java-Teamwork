@@ -23,8 +23,4 @@ public class Station {
     public Rectangle getBoundingBox() {
         return boundingBox;
     }
-//
-//    public void draw(Graphics graphics) {
-//        graphics.drawRect(boundingBox.x,boundingBox.y,boundingBox.width,boundingBox.height);
-//    }
 }

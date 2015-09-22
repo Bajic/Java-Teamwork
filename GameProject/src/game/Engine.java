@@ -34,7 +34,7 @@ public class Engine implements Runnable {
     private Player player;
     private ArrayList<Train> trains;
     private ArrayList<Train> trainsToRemove;
-    public static RailroadSwitch[] railroadSwitches;  // Public field!
+    private RailroadSwitch[] railroadSwitches;
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -46,14 +46,15 @@ public class Engine implements Runnable {
         this.player = new Player("didok4o");
     }
 
+    public RailroadSwitch[] getRailroadSwitches() {
+        return railroadSwitches;
+    }
+
     public void initialize() {
         Assets.init();
         backgroundImage = Assets.load("/images/backgroundScoreLifes.png");
-
         AudioManager.loadSounds();
-
         display = new Display(this.title, this.width, this.height);
-
         this.timer = new Timer();
 
         trains = new ArrayList<>();
@@ -66,7 +67,7 @@ public class Engine implements Runnable {
             }
         }, 1500, (int) (1500 * 2 / timeAdjuster));
 
-        this.mouseListener = new InputMouseListener(this.display);
+        this.mouseListener = new InputMouseListener(this.display, this);
 
         initRailroadSwitches();
         initTurns();
@@ -78,16 +79,8 @@ public class Engine implements Runnable {
     private void update() {
         for (Train train : trains) {
             train.update();
-            for (RailroadSwitch railroadSwitch : railroadSwitches) {
-                if (train.intersects(railroadSwitch.getBoundingBox())) {
-                    railroadSwitch.changeTrainDirection(train);
-                }
-            }
-            for (Turn turn1 : turns) {
-                if (train.intersects(turn1.getBoundingBox())) {
-                    train.setDirection(turn1.getDirection());
-                }
-            }
+            updateRailroadSwitches(train);
+            updateTurns(train);
             for (Station station : stations) {
                 if (train.intersects(station.getBoundingBox())) {
 
@@ -250,6 +243,22 @@ public class Engine implements Runnable {
                 this.difficulty = Difficulty.HARD;
                 this.timeAdjuster = DifficultyMultiplier.HARD;
                 System.out.println("timer: " + this.timeAdjuster);
+            }
+        }
+    }
+
+    private void updateRailroadSwitches(Train train) {
+        for (RailroadSwitch railroadSwitch : railroadSwitches) {
+            if (train.intersects(railroadSwitch.getBoundingBox())) {
+                railroadSwitch.changeTrainDirection(train);
+            }
+        }
+    }
+
+    private void updateTurns(Train train) {
+        for (Turn turn1 : turns) {
+            if (train.intersects(turn1.getBoundingBox())) {
+                train.setDirection(turn1.getDirection());
             }
         }
     }
