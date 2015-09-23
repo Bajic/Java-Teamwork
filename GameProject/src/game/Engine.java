@@ -11,6 +11,7 @@ import enums.Difficulty;
 import enums.Directions;
 import models.*;
 import utilities.DifficultyMultiplier;
+import utilities.Highscore;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -39,6 +40,7 @@ public class Engine implements Runnable {
     private ArrayList<Train> trains;
     private ArrayList<Train> trainsToRemove;
     private ArrayList<RailroadSwitch> railroadSwitches;
+    private String gameOverMessage;
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -48,6 +50,7 @@ public class Engine implements Runnable {
         this.difficulty = Difficulty.EASY;
         this.timeAdjuster = DifficultyMultiplier.EASY;
         this.player = new Player("didok4o");
+        this.gameOverMessage = "";
     }
 
     public Iterable<RailroadSwitch> getRailroadSwitches() {
@@ -81,34 +84,40 @@ public class Engine implements Runnable {
     }
 
     private void update() {
-        for (Train train : trains) {
-            train.update();
-            updateRailroadSwitches(train);
-            updateTurns(train);
-            for (Station station : stations) {
-                if (train.intersects(station.getBoundingBox())) {
+        if (!this.player.isAlive()){
+            gameOver();
+        } else {
+            for (Train train : trains) {
 
-                    if (train.getColor().equals(station.getColor())) {
-                        AudioPlayer.playSound(AudioConstants.RIGHT_STATION);
-                        this.player.setScore(1);
-                        updateGameSpeed();
+                train.update();
+                updateRailroadSwitches(train);
+                updateTurns(train);
 
-                    } else {
-                        this.player.removeLife();
+                for (Station station : stations) {
+                    if (train.intersects(station.getBoundingBox())) {
 
-                        if (this.player.getLives() > 0) {
-                            AudioPlayer.playSound(AudioConstants.WRONG_STATION);
+                        if (train.getColor().equals(station.getColor())) {
+                            AudioPlayer.playSound(AudioConstants.RIGHT_STATION);
+                            this.player.setScore(1);
+                            updateGameSpeed();
+
                         } else {
-                            gameOver();
+                            this.player.removeLife();
+
+                            if (this.player.getLives() > 0) {
+                                AudioPlayer.playSound(AudioConstants.WRONG_STATION);
+                            } else {
+                                this.gameOverMessage = "GAME OVER";
+                            }
                         }
+                        this.trainsToRemove.add(train);
+                        train.setVisible(false);
                     }
-                    this.trainsToRemove.add(train);
-                    train.setVisible(false);
                 }
             }
+            this.trains.removeAll(trainsToRemove);
+            trainsToRemove.clear();
         }
-        this.trains.removeAll(trainsToRemove);
-        trainsToRemove.clear();
     }
 
     @Override
@@ -161,9 +170,14 @@ public class Engine implements Runnable {
     }
 
     private void gameOver() {
+        this.gameOverMessage = "GAME OVER";
+
+        Highscore.writeHighscore(this.player.getName(), this.player.getScore());
+
         AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
         AudioPlayer.playSound(AudioConstants.GAME_OVER);
-        this.display.closeFrame();
+
+        //this.display.closeFrame();
         new GameOverDialog();
         stop();
     }
@@ -179,6 +193,10 @@ public class Engine implements Runnable {
         graphics = bufferStrategy.getDrawGraphics();
         graphics.clearRect(0, 0, this.width, this.height);
         graphics.drawImage(backgroundImage, 0, 0, null);
+
+        graphics.setColor(Color.RED);
+        graphics.setFont(new Font("default", Font.BOLD, 100));
+        graphics.drawString(this.gameOverMessage, 300, 300);
 
         drawGameStats();
 

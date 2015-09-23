@@ -4,7 +4,7 @@ public class Player {
 
     private String name;
     private int lives;
-    private long score;
+    private int score;
 
     public Player(String name) {
         this.name = name;
@@ -14,11 +14,11 @@ public class Player {
         // TODO: gain 1 life every X points
     }
 
-    public long getScore() {
+    public int getScore() {
         return this.score;
     }
 
-    public void setScore(long score) {
+    public void setScore(int score) {
         this.score += score;
     }
 
