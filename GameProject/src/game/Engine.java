@@ -40,7 +40,7 @@ public class Engine implements Runnable {
     private ArrayList<Train> trains;
     private ArrayList<Train> trainsToRemove;
     private ArrayList<RailroadSwitch> railroadSwitches;
-    private String gameOverMessage;
+    //private String gameOverMessage;
 
     public Engine(String title, int width, int height) {
         this.title = title;
@@ -50,7 +50,7 @@ public class Engine implements Runnable {
         this.difficulty = Difficulty.EASY;
         this.timeAdjuster = DifficultyMultiplier.EASY;
         this.player = new Player("didok4o");
-        this.gameOverMessage = "";
+        //this.gameOverMessage = "";
     }
 
     public Iterable<RailroadSwitch> getRailroadSwitches() {
@@ -107,7 +107,7 @@ public class Engine implements Runnable {
                             if (this.player.getLives() > 0) {
                                 AudioPlayer.playSound(AudioConstants.WRONG_STATION);
                             } else {
-                                this.gameOverMessage = "GAME OVER";
+                                //this.gameOverMessage = "GAME OVER";
                             }
                         }
                         this.trainsToRemove.add(train);
@@ -170,14 +170,14 @@ public class Engine implements Runnable {
     }
 
     private void gameOver() {
-        this.gameOverMessage = "GAME OVER";
+        //this.gameOverMessage = "GAME OVER";
 
         Highscore.writeHighscore(this.player.getName(), this.player.getScore());
 
         AudioPlayer.stopMusic(AudioConstants.BACKGROUND_GAME_MUSIC);
         AudioPlayer.playSound(AudioConstants.GAME_OVER);
 
-        //this.display.closeFrame();
+        this.display.closeFrame();
         new GameOverDialog();
         stop();
     }
@@ -196,7 +196,7 @@ public class Engine implements Runnable {
 
         graphics.setColor(Color.RED);
         graphics.setFont(new Font("default", Font.BOLD, 100));
-        graphics.drawString(this.gameOverMessage, 300, 300);
+        //graphics.drawString(this.gameOverMessage, 300, 300);
 
         drawGameStats();
 
