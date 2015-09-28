@@ -29,7 +29,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/lwjgl.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/slick.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -38,7 +38,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/slick.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lwjgl-2.9.3/jar/lwjgl.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lwjgl-2.9.3/jar/lwjgl_util.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -18,7 +18,6 @@ public class MenuScreen extends JFrame {
         this.engine = engine;
         init();
     }
-
     public final void init() {
         AudioManager.loadSounds();
         AudioPlayer.playMusic(AudioConstants.BACKGROUND_MENU_MUSIC);
